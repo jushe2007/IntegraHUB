@@ -61,11 +61,9 @@ public class Cliente {
 
     public void setTel1(String tel1) {
         if (tel1 == null || tel1.isBlank()) {
-            System.out.println("El telefono es un requisito");
-        } else if (tel1.matches("^[0-9+\\-() ]{1,15}$")) {
-            this.tel1 = tel1;
+            System.out.println("El teléfono 1 es un requisito");
         } else {
-            System.out.println("El telefono 1 no tiene un formato valido de numeros o caracteres");
+            this.tel1 = tel1;
         }
     }
 
@@ -78,13 +76,8 @@ public class Cliente {
     }
 
     public void setTel2(String tel2) {
-        if (tel2 == null || tel2.isBlank()) {
-            this.tel2 = tel2;
-        } else if (tel2.matches("^[0-9+\\-() ]{1,15}$")) {
-            this.tel2 = tel2;
-        } else {
-            System.out.println("El telefono 2 no tiene un formato valido de numeros o caracteres");
-        }
+        // Permite nulos o cadenas vacías sin lanzar mensaje de error
+        this.tel2 = tel2;
     }
 
     public int getId_Almacen3() {
