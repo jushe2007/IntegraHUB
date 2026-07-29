@@ -6,16 +6,18 @@ public class Detalle_Movimiento {
     private int id_Detalle = 0;
     private int cod_Movimientos1 = 0;
     private int id_Producto1 = 0;
+    private int id_Almacen7;
     private float cantidad = 0;
     
     // constructores (vacio / con atributos )
     public Detalle_Movimiento() {
     }
  
-        public Detalle_Movimiento(int id_Detalle, int cod_Movimientos1, int id_Producto1, float cantidad) {
+        public Detalle_Movimiento(int id_Detalle, int cod_Movimientos1, int id_Producto1, float cantidad, int Id_Almacen7) {
         setId_Detalle(id_Detalle);
         setCod_Movimientos1(cod_Movimientos1);
         setId_Producto1(id_Producto1);
+        setId_Almacen7(Id_Almacen7);
         setCantidad(cantidad);
     }
 
@@ -52,6 +54,14 @@ public class Detalle_Movimiento {
     public float getCantidad() {
         String precioFormato = String.format("%.2f", this.cantidad);
         return (float) Double.parseDouble(precioFormato);
+    }
+
+    public int getId_Almacen7() {
+        return id_Almacen7;
+    }
+
+    public void setId_Almacen7(int id_Almacen7) {
+        this.id_Almacen7 = id_Almacen7;
     }
 
     public void setCantidad(float cantidad) {

@@ -1,4 +1,88 @@
 package org.example.dao;
 
+
+import org.example.Config.Conexion;
+import org.example.modelo.Almacen;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
 public class AlmacenDAO {
+    // Extrae todos los datos de la tabla Almacen
+    public ArrayList<Almacen> extraerAlmacen() {
+        ArrayList<Almacen> almacenesBD = new ArrayList<Almacen>();
+        String sql = "SELECT * FROM almacen";
+        try (Connection conexion = Conexion.conectar();
+             PreparedStatement stm = conexion.prepareStatement(sql);
+             ResultSet rs = stm.executeQuery()) {
+
+            while (rs.next()) {
+                Almacen almacen = new Almacen();
+
+                almacen.setId_Almacen(rs.getInt("id_almacen"));
+                almacen.setZona(rs.getString("Zona"));
+                almacen.setPiso(rs.getInt("Piso"));
+                almacen.setDireccion(rs.getString("Direccion"));
+
+                almacenesBD.add(almacen);
+            }
+        } catch (SQLException err) {
+            System.err.println("Error al extraer los datos " + err.getMessage());
+        }
+        return almacenesBD;
+    }
+
+     // Borrar
+            public boolean borrarAlmacen (Almacen almacen){
+                boolean eliminado = false;
+                String sql = "DELETE FROM `integraHUB`.`almacen` WHERE Id_almacen = ?";
+                try (Connection conexion = Conexion.conectar();
+                     PreparedStatement stm = conexion.prepareStatement(sql)) {
+
+                    stm.setInt(1, almacen.getId_Almacen());
+                    int filasAfectadas = stm.executeUpdate();
+
+                    if (filasAfectadas > 0) {
+                        eliminado = true;
+                    }
+
+                } catch (SQLException err) {
+                    System.out.println("Error al borrar el almacen " + err.getMessage());
+                }
+
+                return eliminado;
+            }
+
+     // Buscar almacen
+         public ArrayList<Almacen> buscarAlmacen(Almacen almacenex) {
+             ArrayList<Almacen> almacenesBD = new ArrayList<Almacen>();
+             String sql = "SELECT * FROM almacen WHERE Id_almacen = ?";
+
+             try (Connection conexion = Conexion.conectar();
+                  PreparedStatement stm = conexion.prepareStatement(sql)) {
+
+                 stm.setInt(1, almacenex.getId_Almacen());
+
+                 try (ResultSet rs = stm.executeQuery()) {
+                     while (rs.next()) {
+                         Almacen almacen = new Almacen();
+
+                         almacen.setId_Almacen(rs.getInt("Id_almacen"));
+                         almacen.setZona(rs.getString("Zona"));
+                         almacen.setPiso(rs.getInt("Piso"));
+                         almacen.setDireccion(rs.getString("Direccion"));
+
+                         almacenesBD.add(almacen);
+                     }
+                 }
+
+             } catch (SQLException err) {
+                 System.err.println("Error al buscar el almacen: " + err.getMessage());
+             }
+
+             return almacenesBD;
+         }
 }
