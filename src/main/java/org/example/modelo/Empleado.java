@@ -1,15 +1,11 @@
 package org.example.modelo;
 
-public class Empleado {
+public class Empleado extends Persona {
 
     // asignacion de atributos
     private int id_Empleado = 0;
-    private String nombre = "";
-    private String tel1 = "";
-    private String tel2 = null; // Puede ser nulo
     private String puesto = "";
     private String area = "";
-    private String direccion = "";
     private String rfc = "";
     private String curp = "";
     private int id_Almacen1 = 0;
@@ -18,14 +14,11 @@ public class Empleado {
     public Empleado() {
     }
 
-    public Empleado(int id_Empleado, String nombre, String tel1, String tel2, String puesto, String area, String direccion, String rfc, String curp, int id_Almacen1) {
+    public Empleado(String nombre, String direccion, String tel1, String tel2, int id_Empleado, String puesto, String area, String rfc, String curp, int id_Almacen1) {
+        super(nombre, direccion, tel1, tel2);
         setId_Empleado(id_Empleado);
-        setNombre(nombre);
-        setTel1(tel1);
-        setTel2(tel2);
         setPuesto(puesto);
         setArea(area);
-        setDireccion(direccion);
         setRfc(rfc);
         setCurp(curp);
         setId_Almacen1(id_Almacen1);
@@ -43,51 +36,6 @@ public class Empleado {
         } else {
             System.out.println("El id no debe ser menor a 0");
         }
-    }
-
-    public String getNombre() {
-        String nombreFormato = "";
-        if (this.nombre != null) {
-            nombreFormato = this.nombre.toLowerCase();
-        }
-        return nombreFormato;
-    }
-
-    public void setNombre(String nombre) {
-        if (nombre == null || nombre.isBlank()) {
-            System.out.println("El nombre del empleado es un requisito");
-        } else {
-            this.nombre = nombre;
-        }
-    }
-
-    public String getTel1() {
-        String tel1Formato = "";
-        if (this.tel1 != null) {
-            tel1Formato = this.tel1.toLowerCase();
-        }
-        return tel1Formato;
-    }
-
-    public void setTel1(String tel1) {
-        if (tel1 == null || tel1.isBlank()) {
-            System.out.println("El teléfono 1 es un requisito");
-        } else {
-            this.tel1 = tel1;
-        }
-    }
-
-    public String getTel2() {
-        String tel2Formato = "";
-        if (this.tel2 != null) {
-            tel2Formato = this.tel2.toLowerCase();
-        }
-        return tel2Formato;
-    }
-
-    public void setTel2(String tel2) {
-        // Permite nulos o cadenas vacías sin lanzar mensaje de error
-        this.tel2 = tel2;
     }
 
     public String getPuesto() {
@@ -119,22 +67,6 @@ public class Empleado {
             System.out.println("El área del empleado es un requisito");
         } else {
             this.area = area;
-        }
-    }
-
-    public String getDireccion() {
-        String direccionFormato = "";
-        if (this.direccion != null) {
-            direccionFormato = this.direccion.toLowerCase();
-        }
-        return direccionFormato;
-    }
-
-    public void setDireccion(String direccion) {
-        if (direccion == null || direccion.isBlank()) {
-            System.out.println("La dirección del empleado es un requisito");
-        } else {
-            this.direccion = direccion;
         }
     }
 
