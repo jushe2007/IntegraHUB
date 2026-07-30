@@ -120,4 +120,33 @@ public class UsuarioDAO {
 
         return usuarioValido; // Retorna el objeto Usuario si es correcto, o null si falló
     }
+
+    // modificar Usuarios por medio de su id
+    public boolean modificarUsuario(Usuario usuario) {
+        boolean actualizado = false;
+        String sql = "UPDATE usuarios SET usuario = ?, contrasena = ?, nivel_pri = ?, Id_almacen2 = ?, Id_empleado1 = ? WHERE Id_User = ?";
+
+        try (Connection conexion = Conexion.conectar();
+             PreparedStatement stm = conexion.prepareStatement(sql)) {
+
+            stm.setString(1, usuario.getUsuario());
+            stm.setString(2, usuario.getContrasena());
+            stm.setString(3, usuario.getNivel_Pri());
+            stm.setInt(4, usuario.getId_Almacen2());
+            stm.setInt(5, usuario.getId_Empleado1());
+            stm.setInt(6, usuario.getId_User());
+
+            int registrosAfectados = stm.executeUpdate();
+            if (registrosAfectados > 0) {
+                System.out.println("Usuario actualizado correctamente");
+                actualizado = true;
+            } else {
+                System.out.println("No se encontró el ID de usuario");
+            }
+        } catch (SQLException err) {
+            System.out.println("Error al actualizar el usuario " + err.getMessage());
+        }
+
+        return actualizado;
+    }
 }

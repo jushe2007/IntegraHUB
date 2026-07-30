@@ -94,5 +94,36 @@ public class ProveedorDAO {
 
         return proveedoresBD;
     }
+
+    // Modificar proveedor por medio de su id
+    public boolean modificarProveedor(Proveedor proveedor) {
+        boolean actualizado = false;
+        String sql = "UPDATE proveedor SET Nombre = ?, Direccion = ?, Especialidad = ?, Tel1 = ?, Tel2 = ?, Tipo_material = ?, Id_almacen4 = ? WHERE Id_proveedor = ?";
+
+        try (Connection conexion = Conexion.conectar();
+             PreparedStatement stm = conexion.prepareStatement(sql)) {
+
+            stm.setString(1, proveedor.getNombre());
+            stm.setString(2, proveedor.getDireccion());
+            stm.setString(3, proveedor.getEspecialidad());
+            stm.setString(4, proveedor.getTel1());
+            stm.setString(5, proveedor.getTel2());
+            stm.setString(6, proveedor.getTipo_Material());
+            stm.setInt(7, proveedor.getId_Almacen4());
+            stm.setInt(8, proveedor.getId_Proveedor());
+
+            int registrosAfectados = stm.executeUpdate();
+            if (registrosAfectados > 0) {
+                System.out.println("Proveedor actualizado correctamente");
+                actualizado = true;
+            } else {
+                System.out.println("No se encontró el ID del proveedor");
+            }
+        } catch (SQLException err) {
+            System.out.println("Error al actualizar el proveedor " + err.getMessage());
+        }
+
+        return actualizado;
+    }
 }
 

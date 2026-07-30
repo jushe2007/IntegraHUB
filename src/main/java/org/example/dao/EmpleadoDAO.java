@@ -100,4 +100,37 @@ public class EmpleadoDAO {
 
         return empleadosBD;
     }
+
+    // Modificar empleado por medio de su id
+    public boolean modificarEmpleado(Empleado empleado) {
+        boolean actualizado = false;
+        String sql = "UPDATE empleados SET Nombre = ?, Tel1 = ?, Tel2 = ?, Puesto = ?, Area = ?, Direccion = ?, Rfc = ?, Curp = ?, Id_almacen1 = ? WHERE Id_empleado = ?";
+
+        try (Connection conexion = Conexion.conectar();
+             PreparedStatement stm = conexion.prepareStatement(sql)) {
+
+            stm.setString(1, empleado.getNombre());
+            stm.setString(2, empleado.getTel1());
+            stm.setString(3, empleado.getTel2()); // Acepta nulo si la variable lo es
+            stm.setString(4, empleado.getPuesto());
+            stm.setString(5, empleado.getArea());
+            stm.setString(6, empleado.getDireccion());
+            stm.setString(7, empleado.getRfc());
+            stm.setString(8, empleado.getCurp());
+            stm.setInt(9, empleado.getId_Almacen1());
+            stm.setInt(10, empleado.getId_Empleado());
+
+            int registrosAfectados = stm.executeUpdate();
+            if (registrosAfectados > 0) {
+                System.out.println("Empleado actualizado correctamente");
+                actualizado = true;
+            } else {
+                System.out.println("No se encontró el ID del empleado");
+            }
+        } catch (SQLException err) {
+            System.out.println("Error al actualizar el empleado " + err.getMessage());
+        }
+
+        return actualizado;
+    }
 }
