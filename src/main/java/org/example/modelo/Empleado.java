@@ -1,6 +1,6 @@
 package org.example.modelo;
 
-public class Empleado extends Persona {
+public class Empleado extends Persona implements Calificador, Gestionable, Operable{
 
     // asignacion de atributos
     private int id_Empleado = 0;
@@ -112,5 +112,44 @@ public class Empleado extends Persona {
         } else {
             System.out.println("El id no debe ser menor a 0");
         }
+    }
+
+    // Utilizo las interfaces (Calificador, Gestionable y operable) ("asignar almacen" y "Registrar movimiento")
+    @Override
+    public void evaluarMovimiento(int estrellas, String comentario) {
+        Movimiento movimiento = new Movimiento();
+        estrellas = movimiento.getCalificacion();
+        comentario = movimiento.getDesc_Calificacion();
+        System.out.println("El empleado " + getNombre() + " calificó la recepción del proveedor con "
+                + estrellas + " estrellas. Nota: " + comentario);
+    }
+    
+    @Override
+    public void asignarAlmacen(int idAlmacen) {
+        this.setId_Almacen1(idAlmacen);
+        System.out.println("Empleado asignado al almacén ID: " + idAlmacen);
+    }
+
+    @Override
+    public void registrarMovimiento(String tipoMovimiento) {
+        System.out.println("El empleado " + getNombre() + " procesó una " + tipoMovimiento);
+    }
+
+    // llamando al metodo abstracto
+    @Override
+    public String obtenerRol() {
+        return "Empleado del área de " + getArea() + " con puesto en " + getPuesto();
+    }
+
+    // toString que muestra los datos de cada empleado
+    @Override
+    public String toString() {
+        return "Id Empleado: " + getId_Empleado() + '\n' +
+                super.toString() + '\n' +
+                "Puesto: " + getPuesto() + '\n' +
+                "Área: " + getArea() + '\n' +
+                "RFC: " + getRfc() + '\n' +
+                "CURP: " + getCurp() + '\n' +
+                "Id Almacen: " + getId_Almacen1();
     }
 }

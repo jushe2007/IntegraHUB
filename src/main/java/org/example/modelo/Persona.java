@@ -1,6 +1,6 @@
 package org.example.modelo;
 
-public class Persona {
+public abstract class Persona {
     private String nombre = "";
     private String direccion = "";
     private String tel1 = "";
@@ -79,5 +79,15 @@ public class Persona {
         this.tel2 = tel2;
     }
 
+    // Metodo abstracto
+    public abstract String obtenerRol();
 
+    // toString que muestra los datos personales de cada persona
+    @Override
+    public String toString() {
+        return "Nombre: " + getNombre() + '\n' +
+                "Dirección: " + getDireccion() + '\n' +
+                "Teléfono 1: " + getTel1() + '\n' +
+                "Teléfono 2: " + getTel2() +  '\n';
+    }
 }

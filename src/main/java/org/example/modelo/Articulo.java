@@ -148,4 +148,18 @@ public class Articulo {
     public void setId_Almacen5(int id_Almacen5) {
         this.id_Almacen5 = id_Almacen5;
     }
+
+    // Agregamos toString para mostrar datos
+        @Override
+        public String toString() {
+            return  "id del Producto:     " + getId_Producto() + "\n" +
+                    "tipo de Producto:    " + getTipoProducto() + '\n' +
+                    "nombre:              " + getNombre() + '\n' +
+                    "cantidad:            " + getCantidad() + '\n' +
+                    "modelo:              " + getModelo() + '\n' +
+                    "color:               " + getColor() + '\n' +
+                    "producto de:         " + getProducto_De() + '\n' +
+                    "id del Proveedor:    " + getId_Proveedor1() + "\n" +
+                    "id del Almacen:      " + getId_Almacen5();
+        }
 }

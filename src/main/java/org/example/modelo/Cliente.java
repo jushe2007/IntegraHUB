@@ -1,6 +1,6 @@
 package org.example.modelo;
 
-public class Cliente extends Persona {
+public class Cliente extends Persona implements Calificador {
     
     // asignacion de atruibuto
     private int id_Cliente = 0;
@@ -37,4 +37,25 @@ public class Cliente extends Persona {
     public void setId_Almacen3(int id_Almacen3) {
         this.id_Almacen3 = id_Almacen3;
     }
+
+    // Utilizo las interfaces (Calificador) ("evaluar Movimiento")
+    @Override
+    public void evaluarMovimiento(int estrellas, String comentario) {
+        System.out.println("El cliente " + getNombre() + " calificó la compra recibida con "
+                + estrellas + " estrellas. Nota: " + comentario);
+    }
+
+    // Llamar el metodo abstracto
+    @Override
+    public String obtenerRol() {
+        return "Cliente registrado en el sistema";
+    }
+
+    //Agregamos toString para mostrar los datos
+        @Override
+        public String toString() {
+            return  "id del Cliente: " + getId_Cliente() + "\n" +
+                    super.toString() +
+                    "id del Almacen: " + getId_Almacen3();
+        }
 }

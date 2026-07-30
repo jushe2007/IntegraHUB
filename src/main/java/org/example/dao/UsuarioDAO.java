@@ -25,9 +25,9 @@ public class UsuarioDAO {
                 usuario.setId_User(rs.getInt("Id_User"));
                 usuario.setUsuario(rs.getString("usuario"));
                 usuario.setContrasena(rs.getString("contrasena"));
+                usuario.setNivel_Pri(rs.getString("nivel_pri"));
                 usuario.setId_Almacen2(rs.getInt("Id_almacen2"));
                 usuario.setId_Empleado1(rs.getInt("Id_empleado1"));
-
                 usuariosBD.add(usuario);
             }
         } catch (SQLException err) {
@@ -75,6 +75,7 @@ public class UsuarioDAO {
                     usuario.setId_User(rs.getInt("Id_User"));
                     usuario.setUsuario(rs.getString("usuario"));
                     usuario.setContrasena(rs.getString("contrasena"));
+                    usuario.setNivel_Pri(rs.getString("nivel_pri"));
                     usuario.setId_Almacen2(rs.getInt("Id_almacen2"));
                     usuario.setId_Empleado1(rs.getInt("Id_empleado1"));
 
@@ -87,5 +88,36 @@ public class UsuarioDAO {
         }
 
         return usuariosBD;
+    }
+
+    // Validar Usuario (Inicio de Sesión)
+    public Usuario validarUsuario(String usuarioInput, String contrasenaInput) {
+        Usuario usuarioValido = null;
+        String sql = "SELECT * FROM usuarios WHERE usuario = ? AND contrasena = ?";
+
+        try (Connection conexion = Conexion.conectar();
+             PreparedStatement stm = conexion.prepareStatement(sql)) {
+
+            stm.setString(1, usuarioInput);
+            stm.setString(2, contrasenaInput);
+
+            try (ResultSet rs = stm.executeQuery()) {
+                // Si rs.next() es true, significa que el usuario y la contraseña coinciden
+                if (rs.next()) {
+                    usuarioValido = new Usuario();
+                    usuarioValido.setId_User(rs.getInt("Id_User"));
+                    usuarioValido.setUsuario(rs.getString("usuario"));
+                    usuarioValido.setContrasena(rs.getString("contrasena"));
+                    usuarioValido.setNivel_Pri(rs.getString("nivel_pri"));
+                    usuarioValido.setId_Almacen2(rs.getInt("Id_almacen2"));
+                    usuarioValido.setId_Empleado1(rs.getInt("Id_empleado1"));
+                }
+            }
+
+        } catch (SQLException err) {
+            System.err.println("Error al validar el usuario: " + err.getMessage());
+        }
+
+        return usuarioValido; // Retorna el objeto Usuario si es correcto, o null si falló
     }
 }

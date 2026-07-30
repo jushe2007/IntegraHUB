@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class Conexion {
-    private static final String url = "jdbc:mysql://localhost:3306/IntegraHUP";
+    private static final String url = "jdbc:mysql://localhost:3306/IntegraHUB";
     private static final String usuario = "root";
     private static final String password = "Jushe2023-23";
 

@@ -71,4 +71,14 @@ public class Detalle_Movimiento {
             System.out.println("La cantidad no puede ser menor a 0");
         }
     }
+    
+    // usamos el toString para mostrar los datos del detalle movimiento
+    @Override
+        public String toString() {
+            return  "id de detalle:            " + getId_Detalle() + "\n" +
+                    "codigo del Movimientos:   " + getCod_Movimientos1() + "\n" +
+                    "id del Producto:          " + getId_Producto1() + "\n" +
+                    "id del Almacen:           " + getId_Almacen7() + "\n" +
+                    "cantidad:                 " + getCantidad();
+        }
 }

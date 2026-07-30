@@ -33,7 +33,7 @@ public class Almacen {
 
     public String getZona() {
         String zonaFormato = "";
-        if (this.zona !=null) {
+        if (this.zona != null) {
             zonaFormato = this.zona.toLowerCase();
         }
         return zonaFormato;
@@ -73,6 +73,16 @@ public class Almacen {
         } else {
             this.direccion = direccion;
         }
+    }
+
+    //Generamos el toString para mostrar los datos
+
+    @Override
+    public String toString() {
+        return "id_Almacen  =" + getId_Almacen() + "\n" +
+                "zona        =" + getZona() + "\n" +
+                "piso        =" + getPiso() + "\n" +
+                "direccion   =" + getDireccion();
     }
 
 }

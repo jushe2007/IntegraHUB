@@ -6,6 +6,7 @@ public class Usuario {
     private int id_User = 0 ;
     private String usuario = "";
     private String contrasena = "";
+    private String nivel_Pri = "";
     private int id_Almacen2 = 0;
     private int id_Empleado1 = 0;
 
@@ -13,10 +14,11 @@ public class Usuario {
     public Usuario() {
     }
 
-    public Usuario(int id_User, String usuario, String contrasena, int id_Almacen2, int id_Empleado1) {
+    public Usuario(int id_User, String usuario, String contrasena, String nivel_Pri, int id_Almacen2, int id_Empleado1) {
         setId_User(id_User);
         setUsuario(usuario);
         setContrasena(contrasena);
+        setNivel_Pri(nivel_Pri);
         setId_Almacen2(id_Almacen2);
         setId_Empleado1(id_Empleado1);
     }
@@ -68,6 +70,18 @@ public class Usuario {
         }
     }
 
+    public String getNivel_Pri() {
+        String nivel_PriFormato = "";
+        if (this.nivel_Pri != null) {
+            nivel_PriFormato = this.nivel_Pri.toLowerCase();
+        }
+        return nivel_PriFormato;
+    }
+
+    public void setNivel_Pri(String nivel_Pri) {
+        this.nivel_Pri = nivel_Pri;
+    }
+
     public int getId_Almacen2() {
         return id_Almacen2;
     }
@@ -90,5 +104,16 @@ public class Usuario {
         }else {
             System.out.println("El id no debe ser menor a 0");
         }
+    }
+
+    // toString que muestra los datos de cada Usuario 
+    @Override
+    public String toString() {
+        return "Id Usuario: " + getId_User() + '\n' +
+                "Usuario: " + getUsuario() + '\n' +
+                "Contraseña: " + getContrasena() + '\n' +
+                "Nivel de privilegios: " + getNivel_Pri() + '\n' +
+                "Id Almacen: " + getId_Almacen2() + '\n' +
+                "Id Empleado: " + getId_Empleado1();
     }
 }

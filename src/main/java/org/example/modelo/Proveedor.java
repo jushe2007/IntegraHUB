@@ -79,4 +79,20 @@ public class Proveedor extends Persona {
             System.out.println("El id no debe ser menor a 0");
         }
     }
+
+    // llamando al metodo abstracto
+    @Override
+    public String obtenerRol() {
+        return "Proveedor especialista en " + getEspecialidad();
+    }
+
+    // toString que muestra los datos de cada Proveedor
+    @Override
+    public String toString() {
+        return "Id Proveedor: " + getId_Proveedor() + '\n' +
+                super.toString() +
+                "Especialidad: " + getEspecialidad() + '\n' +
+                "Tipo de Material: " + getTipo_Material() + '\n' +
+                "Id Almacen: " + getId_Almacen4();
+    }
 }

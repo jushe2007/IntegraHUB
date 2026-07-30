@@ -206,4 +206,21 @@ public class Movimiento {
             this.desc_Calificacion = desc_Calificacion;
         }
     }
+
+    // toString que muestra los datos de cada Movimiento 
+    @Override
+    public String toString() {
+        return "Código Movimiento: " + getCod_Movimiento() + '\n' +
+                "Id Almacén: " + getId_Almacen6() + '\n' +
+                "Movimiento De: " + getMovimiento_de_() + '\n' +
+                "Id Cliente: " + getId_Cliente1() + '\n' +
+                "Id Proveedor: " + getId_Proveedor2() + '\n' +
+                "Id Empleado: " + getId_Empleado3() + '\n' +
+                "Descripción: " + getDescripcion() + '\n' +
+                "Fecha Registro: " + getFech_Registro() + '\n' +
+                "Fecha Orden: " + getFech_Orden() + '\n' +
+                "Fecha Concluido: " + getFech_Concluido() + '\n' +
+                "Calificación: " + getCalificacion() + '\n' +
+                "Descripción Calificación: " + getDesc_Calificacion();
+    }
 }
