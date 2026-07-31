@@ -149,4 +149,32 @@ public class UsuarioDAO {
 
         return actualizado;
     }
+
+    // Insertar usuario
+    public boolean insertarUsuario(Usuario usuario) {
+        boolean insertado = false;
+        String sql = "INSERT INTO usuarios (usuario, contrasena, nivel_pri, Id_almacen2, Id_empleado1) VALUES (?, ?, ?, ?, ?)";
+
+        try (Connection conexion = Conexion.conectar();
+             PreparedStatement stm = conexion.prepareStatement(sql)) {
+
+            stm.setString(1, usuario.getUsuario());
+            stm.setString(2, usuario.getContrasena());
+            stm.setString(3, usuario.getNivel_Pri());
+            stm.setInt(4, usuario.getId_Almacen2());
+            stm.setInt(5, usuario.getId_Empleado1());
+
+            int registrosAfectados = stm.executeUpdate();
+            if (registrosAfectados > 0) {
+                System.out.println("Usuario registrado correctamente en la base de datos");
+                insertado = true;
+            } else {
+                System.out.println("No se pudo registrar el usuario");
+            }
+        } catch (SQLException err) {
+            System.err.println("Error al insertar el usuario: " + err.getMessage());
+        }
+
+        return insertado;
+    }
 }

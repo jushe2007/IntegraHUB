@@ -212,4 +212,73 @@ public class MovimientoDAO {
 
         return actualizado;
     }
+
+    // Insertar movimiento
+    public boolean insertarMovimiento(Movimiento movimiento) {
+        boolean insertado = false;
+        String sql = "INSERT INTO movimientos (Cod_Movimientos, Id_almacen6, Movimiento_de_, Id_cliente1, Id_proveedor2, " +
+                "Id_empleado3, descripcion, Fech_Registro, Fech_Orden, Fech_Concluido, Calificacion, desc_Calificacion) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+        try (Connection conexion = Conexion.conectar();
+             PreparedStatement stm = conexion.prepareStatement(sql)) {
+
+            stm.setInt(1, movimiento.getCod_Movimiento());
+            stm.setInt(2, movimiento.getId_Almacen6());
+            stm.setString(3, movimiento.getMovimiento_de_());
+
+            // Manejo de Id_Cliente1 (puede ser nulo)
+            if (movimiento.getId_Cliente1() != null) {
+                stm.setInt(4, movimiento.getId_Cliente1());
+            } else {
+                stm.setNull(4, java.sql.Types.INTEGER);
+            }
+
+            // Manejo de Id_Proveedor2 (puede ser nulo)
+            if (movimiento.getId_Proveedor2() != null) {
+                stm.setInt(5, movimiento.getId_Proveedor2());
+            } else {
+                stm.setNull(5, java.sql.Types.INTEGER);
+            }
+
+            stm.setInt(6, movimiento.getId_Empleado3());
+            stm.setString(7, movimiento.getDescripcion());
+
+            // Manejo de Fech_Registro
+            if (movimiento.getFech_Registro() != null) {
+                stm.setDate(8, java.sql.Date.valueOf(movimiento.getFech_Registro()));
+            } else {
+                stm.setNull(8, java.sql.Types.DATE);
+            }
+
+            // Manejo de Fech_Orden
+            if (movimiento.getFech_Orden() != null) {
+                stm.setDate(9, java.sql.Date.valueOf(movimiento.getFech_Orden()));
+            } else {
+                stm.setNull(9, java.sql.Types.DATE);
+            }
+
+            // Manejo de Fech_Concluido
+            if (movimiento.getFech_Concluido() != null) {
+                stm.setDate(10, java.sql.Date.valueOf(movimiento.getFech_Concluido()));
+            } else {
+                stm.setNull(10, java.sql.Types.DATE);
+            }
+
+            stm.setInt(11, movimiento.getCalificacion());
+            stm.setString(12, movimiento.getDesc_Calificacion());
+
+            int registrosAfectados = stm.executeUpdate();
+            if (registrosAfectados > 0) {
+                System.out.println("Movimiento registrado correctamente");
+                insertado = true;
+            } else {
+                System.out.println("No se pudo registrar el movimiento");
+            }
+        } catch (SQLException err) {
+            System.err.println("Error al insertar el movimiento: " + err.getMessage());
+        }
+
+        return insertado;
+    }
 }

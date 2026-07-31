@@ -122,4 +122,33 @@ public class ClienteDAO {
 
         return actualizado;
     }
+
+    // Insertar cliente
+    public boolean insertarCliente(Cliente cliente) {
+        boolean insertado = false;
+        String sql = "INSERT INTO cliente (Id_cliente, Nombre, Direccion, Tel1, Tel2, Id_almacen3) VALUES (?, ?, ?, ?, ?, ?)";
+
+        try (Connection conexion = Conexion.conectar();
+             PreparedStatement stm = conexion.prepareStatement(sql)) {
+
+            stm.setInt(1, cliente.getId_Cliente());
+            stm.setString(2, cliente.getNombre());
+            stm.setString(3, cliente.getDireccion());
+            stm.setString(4, cliente.getTel1());
+            stm.setString(5, cliente.getTel2()); // Acepta nulo directamente si viene como null
+            stm.setInt(6, cliente.getId_Almacen3());
+
+            int registrosAfectados = stm.executeUpdate();
+            if (registrosAfectados > 0) {
+                System.out.println("Cliente registrado correctamente");
+                insertado = true;
+            } else {
+                System.out.println("No se pudo registrar el cliente");
+            }
+        } catch (SQLException err) {
+            System.err.println("Error al insertar el cliente: " + err.getMessage());
+        }
+
+        return insertado;
+    }
 }

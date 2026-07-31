@@ -125,5 +125,36 @@ public class ProveedorDAO {
 
         return actualizado;
     }
+
+    // Insertar proveedor
+    public boolean insertarProveedor(Proveedor proveedor) {
+        boolean insertado = false;
+        String sql = "INSERT INTO proveedor (Id_proveedor, Nombre, Direccion, Especialidad, Tel1, Tel2, Tipo_material, Id_almacen4) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+
+        try (Connection conexion = Conexion.conectar();
+             PreparedStatement stm = conexion.prepareStatement(sql)) {
+
+            stm.setInt(1, proveedor.getId_Proveedor());
+            stm.setString(2, proveedor.getNombre());
+            stm.setString(3, proveedor.getDireccion());
+            stm.setString(4, proveedor.getEspecialidad());
+            stm.setString(5, proveedor.getTel1());
+            stm.setString(6, proveedor.getTel2()); // Permite nulo
+            stm.setString(7, proveedor.getTipo_Material());
+            stm.setInt(8, proveedor.getId_Almacen4());
+
+            int registrosAfectados = stm.executeUpdate();
+            if (registrosAfectados > 0) {
+                System.out.println("Proveedor registrado correctamente");
+                insertado = true;
+            } else {
+                System.out.println("No se pudo registrar el proveedor");
+            }
+        } catch (SQLException err) {
+            System.err.println("Error al insertar el proveedor: " + err.getMessage());
+        }
+
+        return insertado;
+    }
 }
 

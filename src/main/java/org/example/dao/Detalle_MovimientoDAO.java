@@ -112,4 +112,31 @@ public class Detalle_MovimientoDAO {
 
         return actualizado;
     }
+
+    // Insertar detalle de movimiento
+    public boolean insertarDetalle_Movimiento(Detalle_Movimiento detalle_Movimiento) {
+        boolean insertado = false;
+        String sql = "INSERT INTO detalle_movimientos (Cod_Movimientos1, Id_producto1, Id_almacen7, Cantidad) VALUES (?, ?, ?, ?)";
+
+        try (Connection conexion = Conexion.conectar();
+             PreparedStatement stm = conexion.prepareStatement(sql)) {
+
+            stm.setInt(1, detalle_Movimiento.getCod_Movimientos1());
+            stm.setInt(2, detalle_Movimiento.getId_Producto1());
+            stm.setInt(3, detalle_Movimiento.getId_Almacen7());
+            stm.setFloat(4, detalle_Movimiento.getCantidad());
+
+            int registrosAfectados = stm.executeUpdate();
+            if (registrosAfectados > 0) {
+                System.out.println("Detalle de movimiento registrado correctamente");
+                insertado = true;
+            } else {
+                System.out.println("No se pudo registrar el detalle de movimiento");
+            }
+        } catch (SQLException err) {
+            System.err.println("Error al insertar el detalle de movimiento: " + err.getMessage());
+        }
+
+        return insertado;
+    }
 }

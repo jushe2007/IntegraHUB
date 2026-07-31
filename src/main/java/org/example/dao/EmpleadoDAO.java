@@ -86,7 +86,7 @@ public class EmpleadoDAO {
                     empleado.setPuesto(rs.getString("Puesto"));
                     empleado.setArea(rs.getString("Area"));
                     empleado.setDireccion(rs.getString("Dirección"));
-                    empleado.setRfc(rs.getString("Rfc"));
+                    empleado.setRfc(rs.getString("RFC"));
                     empleado.setCurp(rs.getString("Curp"));
                     empleado.setId_Almacen1(rs.getInt("Id_almacen1"));
 
@@ -132,5 +132,37 @@ public class EmpleadoDAO {
         }
 
         return actualizado;
+    }
+
+    // Insertar empleado
+    public boolean insertarEmpleado(Empleado empleado) {
+        boolean insertado = false;
+        String sql = "INSERT INTO empleados (Nombre, Tel1, Tel2, Puesto, Area, Direccion, Rfc, Curp, Id_almacen1) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+        try (Connection conexion = Conexion.conectar();
+             PreparedStatement stm = conexion.prepareStatement(sql)) {
+
+            stm.setString(1, empleado.getNombre());
+            stm.setString(2, empleado.getTel1());
+            stm.setString(3, empleado.getTel2()); // Acepta nulo directamente si viene como null
+            stm.setString(4, empleado.getPuesto());
+            stm.setString(5, empleado.getArea());
+            stm.setString(6, empleado.getDireccion());
+            stm.setString(7, empleado.getRfc());
+            stm.setString(8, empleado.getCurp());
+            stm.setInt(9, empleado.getId_Almacen1());
+
+            int registrosAfectados = stm.executeUpdate();
+            if (registrosAfectados > 0) {
+                System.out.println("Empleado registrado correctamente");
+                insertado = true;
+            } else {
+                System.out.println("No se pudo registrar el empleado");
+            }
+        } catch (SQLException err) {
+            System.err.println("Error al insertar el empleado: " + err.getMessage());
+        }
+
+        return insertado;
     }
 }

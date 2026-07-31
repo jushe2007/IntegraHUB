@@ -129,4 +129,36 @@ public class ArticuloDAO {
 
         return actualizado;
     }
+
+    // Insertar artículo
+    public boolean insertarArticulo(Articulo articulo) {
+        boolean insertado = false;
+        String sql = "INSERT INTO articulo (Id_producto, Tipo_producto, Nombre, Cantidad, Modelo, Color, Producto_de_, Id_proveedor1, Id_almacen5) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+        try (Connection conexion = Conexion.conectar();
+             PreparedStatement stm = conexion.prepareStatement(sql)) {
+
+            stm.setInt(1, articulo.getId_Producto());
+            stm.setString(2, articulo.getTipoProducto());
+            stm.setString(3, articulo.getNombre());
+            stm.setFloat(4, articulo.getCantidad());
+            stm.setString(5, articulo.getModelo());
+            stm.setString(6, articulo.getColor()); // Acepta nulo si la variable es null
+            stm.setString(7, articulo.getProducto_De());
+            stm.setInt(8, articulo.getId_Proveedor1());
+            stm.setInt(9, articulo.getId_Almacen5());
+
+            int registrosAfectados = stm.executeUpdate();
+            if (registrosAfectados > 0) {
+                System.out.println("Artículo registrado correctamente");
+                insertado = true;
+            } else {
+                System.out.println("No se pudo registrar el artículo");
+            }
+        } catch (SQLException err) {
+            System.err.println("Error al insertar el artículo: " + err.getMessage());
+        }
+
+        return insertado;
+    }
 }

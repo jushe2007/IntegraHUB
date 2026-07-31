@@ -112,4 +112,31 @@ public class AlmacenDAO {
 
         return actualizado;
     }
+
+    // Insertar almacén
+    public boolean insertarAlmacen(Almacen almacen) {
+        boolean insertado = false;
+        String sql = "INSERT INTO almacen (Id_almacen, Zona, Piso, Direccion) VALUES (?, ?, ?, ?)";
+
+        try (Connection conexion = Conexion.conectar();
+             PreparedStatement stm = conexion.prepareStatement(sql)) {
+
+            stm.setInt(1, almacen.getId_Almacen());
+            stm.setString(2, almacen.getZona());
+            stm.setInt(3, almacen.getPiso());
+            stm.setString(4, almacen.getDireccion());
+
+            int registrosAfectados = stm.executeUpdate();
+            if (registrosAfectados > 0) {
+                System.out.println("Almacén registrado correctamente");
+                insertado = true;
+            } else {
+                System.out.println("No se pudo registrar el almacén");
+            }
+        } catch (SQLException err) {
+            System.err.println("Error al insertar el almacén: " + err.getMessage());
+        }
+
+        return insertado;
+    }
 }
