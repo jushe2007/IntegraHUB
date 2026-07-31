@@ -17,8 +17,8 @@ public class Detalle_Movimiento {
         setId_Detalle(id_Detalle);
         setCod_Movimientos1(cod_Movimientos1);
         setId_Producto1(id_Producto1);
-        setId_Almacen7(Id_Almacen7);
         setCantidad(cantidad);
+        setId_Almacen7(Id_Almacen7);
     }
 
     // geters (formatos) y setters (condiciones para guardar)

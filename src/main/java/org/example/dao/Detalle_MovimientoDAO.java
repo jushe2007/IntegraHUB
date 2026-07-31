@@ -23,7 +23,7 @@ public class Detalle_MovimientoDAO {
                         detalle_Movimiento.setId_Detalle(rs.getInt("Id_detalle"));
                             detalle_Movimiento.setCod_Movimientos1(rs.getInt("Cod_Movimientos1"));                            detalle_Movimiento.setId_Producto1(rs.getInt("id_producto1"));
                             detalle_Movimiento.setId_Almacen7(rs.getInt("id_almacen7"));
-                            detalle_Movimiento.setCantidad(rs.getInt("Cantidad"));
+                            detalle_Movimiento.setCantidad(rs.getFloat("Cantidad"));
 
                           Detalle_MovimientosBD.add(detalle_Movimiento);
                         }
@@ -72,7 +72,7 @@ public class Detalle_MovimientoDAO {
                     detalle_Movimiento.setCod_Movimientos1(rs.getInt("Cod_Movimientos1"));
                     detalle_Movimiento.setId_Producto1(rs.getInt("id_producto1"));
                     detalle_Movimiento.setId_Almacen7(rs.getInt("id_almacen7"));
-                    detalle_Movimiento.setCantidad(rs.getInt("Cantidad"));
+                    detalle_Movimiento.setCantidad(rs.getFloat("Cantidad"));
 
                     Detalle_MovimientosBD.add(detalle_Movimiento);
                 }
@@ -83,5 +83,33 @@ public class Detalle_MovimientoDAO {
         }
 
         return Detalle_MovimientosBD;
+    }
+
+    // Modificar detalle de movimiento por medio de su id
+    public boolean modificarDetalle_Movimiento(Detalle_Movimiento detalle_Movimiento) {
+        boolean actualizado = false;
+        String sql = "UPDATE detalle_movimiento SET Cod_Movimientos1 = ?, id_producto1 = ?, id_almacen7 = ?, Cantidad = ? WHERE Id_detalle = ?";
+
+        try (Connection conexion = Conexion.conectar();
+             PreparedStatement stm = conexion.prepareStatement(sql)) {
+
+            stm.setInt(1, detalle_Movimiento.getCod_Movimientos1());
+            stm.setInt(2, detalle_Movimiento.getId_Producto1());
+            stm.setInt(3, detalle_Movimiento.getId_Almacen7());
+            stm.setFloat(4, detalle_Movimiento.getCantidad());
+            stm.setInt(5, detalle_Movimiento.getId_Detalle());
+
+            int registrosAfectados = stm.executeUpdate();
+            if (registrosAfectados > 0) {
+                System.out.println("Detalle de movimiento actualizado correctamente");
+                actualizado = true;
+            } else {
+                System.out.println("No se encontró el ID del detalle de movimiento");
+            }
+        } catch (SQLException err) {
+            System.err.println("Error al actualizar el detalle de movimiento: " + err.getMessage());
+        }
+
+        return actualizado;
     }
 }

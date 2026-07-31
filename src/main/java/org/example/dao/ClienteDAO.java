@@ -93,4 +93,33 @@ public class ClienteDAO {
 
         return clientesBD;
     }
+
+    // Modificar cliente por medio de su id
+    public boolean modificarCliente(Cliente cliente) {
+        boolean actualizado = false;
+        String sql = "UPDATE cliente SET Nombre = ?, Direccion = ?, Tel1 = ?, Tel2 = ?, id_almacen3 = ? WHERE Id_cliente = ?";
+
+        try (Connection conexion = Conexion.conectar();
+             PreparedStatement stm = conexion.prepareStatement(sql)) {
+
+            stm.setString(1, cliente.getNombre());
+            stm.setString(2, cliente.getDireccion());
+            stm.setString(3, cliente.getTel1());
+            stm.setString(4, cliente.getTel2()); // Acepta nulo si la variable lo es
+            stm.setInt(5, cliente.getId_Almacen3());
+            stm.setInt(6, cliente.getId_Cliente());
+
+            int registrosAfectados = stm.executeUpdate();
+            if (registrosAfectados > 0) {
+                System.out.println("Cliente actualizado correctamente");
+                actualizado = true;
+            } else {
+                System.out.println("No se encontró el ID del cliente");
+            }
+        } catch (SQLException err) {
+            System.err.println("Error al actualizar el cliente: " + err.getMessage());
+        }
+
+        return actualizado;
+    }
 }

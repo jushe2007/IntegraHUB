@@ -85,4 +85,31 @@ public class AlmacenDAO {
 
              return almacenesBD;
          }
+
+    // Modificar almacén por medio de su id
+    public boolean modificarAlmacen(Almacen almacen) {
+        boolean actualizado = false;
+        String sql = "UPDATE almacen SET Zona = ?, Piso = ?, Direccion = ? WHERE Id_almacen = ?";
+
+        try (Connection conexion = Conexion.conectar();
+             PreparedStatement stm = conexion.prepareStatement(sql)) {
+
+            stm.setString(1, almacen.getZona());
+            stm.setInt(2, almacen.getPiso());
+            stm.setString(3, almacen.getDireccion());
+            stm.setInt(4, almacen.getId_Almacen());
+
+            int registrosAfectados = stm.executeUpdate();
+            if (registrosAfectados > 0) {
+                System.out.println("Almacún actualizado correctamente");
+                actualizado = true;
+            } else {
+                System.out.println("No se encontró el ID del almacén");
+            }
+        } catch (SQLException err) {
+            System.err.println("Error al actualizar el almacén: " + err.getMessage());
+        }
+
+        return actualizado;
+    }
 }
