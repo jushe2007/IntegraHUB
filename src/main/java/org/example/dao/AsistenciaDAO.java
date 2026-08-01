@@ -125,6 +125,33 @@ public class AsistenciaDAO {
         return asistenciasBD;
     }
 
+    // Consulta si el empleado ya tiene registro el día de hoy
+    public Asistencia obtenerAsistenciaHoyPorEmpleado(Asistencia asistencia) {
+        String sql = "SELECT * FROM asistencias WHERE Id_empleado2 = ? AND Fecha = CURDATE()";
+
+        try (Connection conexion = Conexion.conectar();
+             PreparedStatement stm = conexion.prepareStatement(sql)) {
+
+            stm.setInt(1, asistencia.getId_Empleado());
+
+            try (ResultSet rs = stm.executeQuery()) {
+                if (rs.next()) {
+                    asistencia = new Asistencia();
+                    asistencia.setId_Asistencia(rs.getInt("Id_asistencia"));
+                    asistencia.setFecha(rs.getString("Fecha"));
+                    asistencia.setHoraEntrada(rs.getString("horEntrada"));
+                    asistencia.setHoraSalida(rs.getString("horSalida"));
+                    asistencia.setTotalHr(rs.getString("Totalhr"));
+                    asistencia.setId_Empleado(rs.getInt("Id_empleado2"));
+                }
+            }
+        } catch (SQLException err) {
+            System.err.println("Error al consultar la asistencia de hoy: " + err.getMessage());
+        }
+
+        return asistencia;
+    }
+
     // Eliminar un registro de asistencia
     public boolean eliminarAsistencia(Asistencia asistencia) {
         boolean eliminado = false;

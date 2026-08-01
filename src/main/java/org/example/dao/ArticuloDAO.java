@@ -63,40 +63,42 @@ public class ArticuloDAO {
 
                   return eliminado;
               }
-       // Buscar articulo
-          public ArrayList<Articulo> buscarArticulo(Articulo articuloex) {
-              ArrayList<Articulo> articuloBD = new ArrayList<Articulo>();
-              String sql = "SELECT * FROM articulo WHERE Id_producto = ?";
+    // Buscar articulo por ID o por Nombre
+    public ArrayList<Articulo> buscarArticulo(Articulo articuloex) {
+        ArrayList<Articulo> articuloBD = new ArrayList<Articulo>();
+        // Permite buscar si coincide el ID exacto o si el nombre contiene el texto buscado
+        String sql = "SELECT * FROM articulo WHERE Id_producto = ? OR Nombre LIKE ?";
 
-              try (Connection conexion = Conexion.conectar();
-                   PreparedStatement stm = conexion.prepareStatement(sql)) {
+        try (Connection conexion = Conexion.conectar();
+             PreparedStatement stm = conexion.prepareStatement(sql)) {
 
-                  stm.setInt(1, articuloex.getId_Producto());
+            stm.setInt(1, articuloex.getId_Producto());
+            stm.setString(2, "%" + articuloex.getNombre() + "%");
 
-                  try (ResultSet rs = stm.executeQuery()) {
-                      while (rs.next()) {
-                          Articulo articulo = new Articulo();
+            try (ResultSet rs = stm.executeQuery()) {
+                while (rs.next()) {
+                    Articulo articulo = new Articulo();
 
-                          articulo.setId_Producto(rs.getInt("Id_cliente"));
-                          articulo.setTipoProducto(rs.getString("Tipo_producto"));
-                          articulo.setNombre(rs.getString("Nombre"));
-                          articulo.setCantidad(rs.getFloat("Cantidad"));
-                          articulo.setModelo(rs.getString("Modelo"));
-                          articulo.setColor(rs.getString("Color"));
-                          articulo.setProducto_De(rs.getString("Producto_de_"));
-                          articulo.setId_Proveedor1(rs.getInt("Id_proveedor1"));
-                          articulo.setId_Almacen5(rs.getInt("Id_almacen5"));
+                    articulo.setId_Producto(rs.getInt("Id_producto"));
+                    articulo.setTipoProducto(rs.getString("Tipo_producto"));
+                    articulo.setNombre(rs.getString("Nombre"));
+                    articulo.setCantidad(rs.getFloat("Cantidad"));
+                    articulo.setModelo(rs.getString("Modelo"));
+                    articulo.setColor(rs.getString("Color"));
+                    articulo.setProducto_De(rs.getString("Producto_de_"));
+                    articulo.setId_Proveedor1(rs.getInt("Id_proveedor1"));
+                    articulo.setId_Almacen5(rs.getInt("Id_almacen5"));
 
-                          articuloBD.add(articulo);
-                      }
-                  }
+                    articuloBD.add(articulo);
+                }
+            }
 
-              } catch (SQLException err) {
-                  System.err.println("Error al buscar el articulo: " + err.getMessage());
-              }
+        } catch (SQLException err) {
+            System.err.println("Error al buscar el articulo: " + err.getMessage());
+        }
 
-              return articuloBD;
-          }
+        return articuloBD;
+    }
 
     // Modificar articulo por medio de su id
     public boolean modificarArticulo(Articulo articulo) {

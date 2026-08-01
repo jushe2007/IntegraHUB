@@ -63,12 +63,12 @@ public class Detalle_MovimientoDAO {
     // Buscar detalles de movimiento pidiendo su id
     public ArrayList<Detalle_Movimiento> buscarDetalle_Movimiento(Detalle_Movimiento detalle_Movimiento) {
         ArrayList<Detalle_Movimiento> detalleMovimientosBD = new ArrayList<>();
-        String sql = "SELECT * FROM detalle_movimiento WHERE Id_detalle = ?";
+        String sql = "SELECT * FROM detalle_movimiento WHERE Cod_Movimientos1 = ?";
 
         try (Connection conexion = Conexion.conectar();
              PreparedStatement stm = conexion.prepareStatement(sql)) {
 
-            stm.setInt(1, detalle_Movimiento.getId_Detalle());
+            stm.setInt(1, detalle_Movimiento.getCod_Movimientos1());
 
             try (ResultSet rs = stm.executeQuery()) {
                 while (rs.next()) {

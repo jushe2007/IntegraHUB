@@ -8,6 +8,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class MovimientoDAO {
@@ -137,6 +138,60 @@ public class MovimientoDAO {
         } catch (SQLException err) {
             // Se corrigió el mensaje de error de "cliente" a "movimiento"
             System.err.println("Error al buscar el movimiento: " + err.getMessage());
+        }
+
+        return movimientosBD;
+    }
+
+    // Buscar movimientos por Fecha de Registro recibiendo LocalDate directamente
+    public ArrayList<Movimiento> buscarMovimientoPorFecha(LocalDate fechaBusqueda) {
+        ArrayList<Movimiento> movimientosBD = new ArrayList<Movimiento>();
+        String sql = "SELECT * FROM movimientos WHERE Fech_Registro = ?";
+
+        try (Connection conexion = Conexion.conectar();
+             PreparedStatement stm = conexion.prepareStatement(sql)) {
+
+            // Aquí la conversión de LocalDate a java.sql.Date funciona perfectamente
+            stm.setDate(1, java.sql.Date.valueOf(fechaBusqueda));
+
+            try (ResultSet rs = stm.executeQuery()) {
+                while (rs.next()) {
+                    Movimiento mov = new Movimiento();
+                    mov.setCod_Movimiento(rs.getInt("Cod_Movimientos"));
+                    mov.setId_Almacen6(rs.getInt("Id_almacen6"));
+                    mov.setMovimiento_de_(rs.getString("Movimiento_de_"));
+
+                    int idCliente = rs.getInt("Id_cliente1");
+                    mov.setId_Cliente1(rs.wasNull() ? null : idCliente);
+
+                    int idProveedor = rs.getInt("Id_proveedor2");
+                    mov.setId_Proveedor2(rs.wasNull() ? null : idProveedor);
+
+                    mov.setId_Empleado3(rs.getInt("Id_empleado3"));
+                    mov.setDescripcion(rs.getString("descripcion"));
+
+                    Date fechRegistro = rs.getDate("Fech_Registro");
+                    if (fechRegistro != null) {
+                        mov.setFech_Registro(fechRegistro.toLocalDate());
+                    }
+
+                    Date fechOrden = rs.getDate("Fech_Orden");
+                    if (fechOrden != null) {
+                        mov.setFech_Orden(fechOrden.toLocalDate());
+                    }
+
+                    Date fechConcluido = rs.getDate("Fech_Concluido");
+                    mov.setFech_Concluido(fechConcluido != null ? fechConcluido.toLocalDate() : null);
+
+                    mov.setCalificacion(rs.getInt("Calificacion"));
+                    mov.setDesc_Calificacion(rs.getString("desc_Calificacion"));
+
+                    movimientosBD.add(mov);
+                }
+            }
+
+        } catch (SQLException err) {
+            System.err.println("Error al buscar los movimientos por fecha: " + err.getMessage());
         }
 
         return movimientosBD;
