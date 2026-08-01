@@ -54,8 +54,8 @@ public class Usuario {
 
     public String getContrasena() {
         String contrasenaFormato = "";
-        if(this.contrasena!=null){
-            contrasenaFormato = this.usuario.toLowerCase();
+        if(this.contrasena != null){
+            contrasenaFormato = this.contrasena;
         }
         return contrasenaFormato;
     }

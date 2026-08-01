@@ -3,7 +3,8 @@ package org.example.modelo;
 public abstract class Persona {
 
 
-    // asignacion de atributos (Todos se ponen nulos para evitar problemas)    private String nombre = "";
+    // asignacion de atributos (Todos se ponen nulos para evitar problemas)
+    private String nombre = "";
     private String direccion = "";
     private String tel1 = "";
     private String tel2 = "";

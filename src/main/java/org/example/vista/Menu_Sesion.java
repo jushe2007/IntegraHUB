@@ -15,9 +15,9 @@ public class Menu_Sesion {
     public static void validarUsuario() throws IOException {
         System.out.println("\n--- INICIO DE SESIÓN ---");
         System.out.print("Usuario: ");
-        usuario.setUsuario(leer.readLine());
+        usuario.setUsuario(leer.readLine().trim());
         System.out.print("Contraseña: ");
-        usuario.setContrasena(leer.readLine());
+        usuario.setContrasena(leer.readLine().trim());
 
         Usuario usuarioLogueado = usuarioDAO.validarUsuario(usuario);
         if (usuarioLogueado != null) {
@@ -48,7 +48,7 @@ public class Menu_Sesion {
                     case 1: validarUsuario() ; break;
                     case 2: sinUsuario(); break;
                     case 3: opcion = 4; Menu_Inicio.menu(); break;
-                    case 4: System.out.println("Saliendo del sistema..."); break;
+                    case 4: System.exit(0); System.out.println("Saliendo del sistema..."); break;
                     default: System.out.println("Opción no válida"); break;
                 }
             } catch (NumberFormatException e) {
