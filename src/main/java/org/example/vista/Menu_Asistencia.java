@@ -58,7 +58,7 @@ public class Menu_Asistencia {
                 switch (opcion) {
                     case 1: marcarEntrada() ; break;
                     case 2: marcarSalida(); break;
-                    case 3: opcion = 4; Menu_Inicio.menu(); break;
+                    case 3: Menu_Inicio.menu(); break;
                     case 4: System.exit(0); System.out.println("Saliendo del sistema..."); break;
                     default: System.out.println("Opción no válida"); break;
                 }

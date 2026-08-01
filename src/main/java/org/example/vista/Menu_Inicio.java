@@ -21,9 +21,9 @@ public class Menu_Inicio {
             try {
                 opcion = Integer.parseInt(leer.readLine());
                 switch (opcion) {
-                    case 1: opcion =4; Menu_Sesion.menu() ; break;
+                    case 1: Menu_Sesion.menu() ; break;
                     // case 2: mostrarComunidadUniversitaria(); break;
-                    case 3: opcion =4; Menu_Asistencia.menu(); break;
+                    case 3: Menu_Asistencia.menu(); break;
                     case 4: System.exit(0); System.out.println("Saliendo del sistema..."); break;
                     default: System.out.println("Opción no válida"); break;
                 }
