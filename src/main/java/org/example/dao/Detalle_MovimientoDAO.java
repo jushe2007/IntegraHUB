@@ -22,7 +22,6 @@ public class Detalle_MovimientoDAO {
     
                         detalle_Movimiento.setId_Detalle(rs.getInt("Id_detalle"));
                             detalle_Movimiento.setCod_Movimientos1(rs.getInt("Cod_Movimientos1"));                            detalle_Movimiento.setId_Producto1(rs.getInt("id_producto1"));
-                            detalle_Movimiento.setId_Almacen7(rs.getInt("id_almacen7"));
                             detalle_Movimiento.setCantidad(rs.getFloat("Cantidad"));
 
                           Detalle_MovimientosBD.add(detalle_Movimiento);
@@ -71,7 +70,6 @@ public class Detalle_MovimientoDAO {
                     detalle_Movimiento.setId_Detalle(rs.getInt("Id_detalle"));
                     detalle_Movimiento.setCod_Movimientos1(rs.getInt("Cod_Movimientos1"));
                     detalle_Movimiento.setId_Producto1(rs.getInt("id_producto1"));
-                    detalle_Movimiento.setId_Almacen7(rs.getInt("id_almacen7"));
                     detalle_Movimiento.setCantidad(rs.getFloat("Cantidad"));
 
                     Detalle_MovimientosBD.add(detalle_Movimiento);
@@ -88,16 +86,15 @@ public class Detalle_MovimientoDAO {
     // Modificar detalle de movimiento por medio de su id
     public boolean modificarDetalle_Movimiento(Detalle_Movimiento detalle_Movimiento) {
         boolean actualizado = false;
-        String sql = "UPDATE detalle_movimiento SET Cod_Movimientos1 = ?, id_producto1 = ?, id_almacen7 = ?, Cantidad = ? WHERE Id_detalle = ?";
+        String sql = "UPDATE detalle_movimiento SET Cod_Movimientos1 = ?, id_producto1 = ?, Cantidad = ? WHERE Id_detalle = ?";
 
         try (Connection conexion = Conexion.conectar();
              PreparedStatement stm = conexion.prepareStatement(sql)) {
 
             stm.setInt(1, detalle_Movimiento.getCod_Movimientos1());
             stm.setInt(2, detalle_Movimiento.getId_Producto1());
-            stm.setInt(3, detalle_Movimiento.getId_Almacen7());
-            stm.setFloat(4, detalle_Movimiento.getCantidad());
-            stm.setInt(5, detalle_Movimiento.getId_Detalle());
+            stm.setFloat(3, detalle_Movimiento.getCantidad());
+            stm.setInt(4, detalle_Movimiento.getId_Detalle());
 
             int registrosAfectados = stm.executeUpdate();
             if (registrosAfectados > 0) {
@@ -116,15 +113,14 @@ public class Detalle_MovimientoDAO {
     // Insertar detalle de movimiento
     public boolean insertarDetalle_Movimiento(Detalle_Movimiento detalle_Movimiento) {
         boolean insertado = false;
-        String sql = "INSERT INTO detalle_movimientos (Cod_Movimientos1, Id_producto1, Id_almacen7, Cantidad) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO detalle_movimientos (Cod_Movimientos1, Id_producto1, Cantidad) VALUES (?, ?, ?)";
 
         try (Connection conexion = Conexion.conectar();
              PreparedStatement stm = conexion.prepareStatement(sql)) {
 
             stm.setInt(1, detalle_Movimiento.getCod_Movimientos1());
             stm.setInt(2, detalle_Movimiento.getId_Producto1());
-            stm.setInt(3, detalle_Movimiento.getId_Almacen7());
-            stm.setFloat(4, detalle_Movimiento.getCantidad());
+            stm.setFloat(3, detalle_Movimiento.getCantidad());
 
             int registrosAfectados = stm.executeUpdate();
             if (registrosAfectados > 0) {
