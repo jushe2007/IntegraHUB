@@ -38,7 +38,7 @@ public class ProveedorDAO {
         }
         return proveedoresBD;
     }
-    
+
     //Borrando el proveedor pidiendo su id
     public boolean borrarProveedor(Proveedor proveedor) {
         boolean eliminado = false;
@@ -59,32 +59,32 @@ public class ProveedorDAO {
 
         return eliminado;
     }
-    
+
     //Buscar proveedor por id o Nombre
-    public ArrayList<Proveedor> buscarProveedor(Proveedor proveedorex) {
+    public ArrayList<Proveedor> buscarProveedor(Proveedor proveedor) {
         ArrayList<Proveedor> proveedoresBD = new ArrayList<Proveedor>();
         String sql = "SELECT * FROM proveedor WHERE Id_proveedor = ? OR Nombre LIKE ?";
 
         try (Connection conexion = Conexion.conectar();
              PreparedStatement stm = conexion.prepareStatement(sql)) {
 
-            stm.setInt(1, proveedorex.getId_Proveedor());
-            stm.setString(2, "%" + proveedorex.getNombre() + "%");
+            stm.setInt(1, proveedor.getId_Proveedor());
+            stm.setString(2, "%" + proveedor.getNombre() + "%");
 
             try (ResultSet rs = stm.executeQuery()) {
                 while (rs.next()) {
-                    Proveedor proveedor = new Proveedor();
+                    Proveedor prov = new Proveedor();
 
-                    proveedor.setId_Proveedor(rs.getInt("Id_proveedor"));
-                    proveedor.setNombre(rs.getString("Nombre"));
-                    proveedor.setDireccion(rs.getString("Dirección"));
-                    proveedor.setEspecialidad(rs.getString("Especialidad"));
-                    proveedor.setTel1(rs.getString("Tel1"));
-                    proveedor.setTel2(rs.getString("Tel2"));
-                    proveedor.setTipo_Material(rs.getString("Tipo_material"));
-                    proveedor.setId_Almacen4(rs.getInt("Id_almacen4"));
+                    prov.setId_Proveedor(rs.getInt("Id_proveedor"));
+                    prov.setNombre(rs.getString("Nombre"));
+                    prov.setDireccion(rs.getString("Dirección"));
+                    prov.setEspecialidad(rs.getString("Especialidad"));
+                    prov.setTel1(rs.getString("Tel1"));
+                    prov.setTel2(rs.getString("Tel2"));
+                    prov.setTipo_Material(rs.getString("Tipo_material"));
+                    prov.setId_Almacen4(rs.getInt("Id_almacen4"));
 
-                    proveedoresBD.add(proveedor);
+                    proveedoresBD.add(prov);
                 }
             }
 
@@ -157,4 +157,3 @@ public class ProveedorDAO {
         return insertado;
     }
 }
-

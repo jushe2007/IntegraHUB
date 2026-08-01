@@ -12,14 +12,15 @@ import java.util.ArrayList;
 public class AsistenciaDAO {
 
     // Marcar Entrada (INSERT) usando la fecha y hora de MySQL
-    public boolean marcarEntrada(int idEmpleado) {
+    public boolean marcarEntrada(Asistencia asistencia) {
         boolean insertado = false;
         String sql = "INSERT INTO asistencias (Fecha, horEntrada, Id_empleado2) VALUES (CURRENT_DATE(), CURRENT_TIME(), ?)";
 
         try (Connection conexion = Conexion.conectar();
              PreparedStatement stm = conexion.prepareStatement(sql)) {
 
-            stm.setInt(1, idEmpleado);
+            // Extraemos el ID del empleado desde el objeto Asistencia
+            stm.setInt(1, asistencia.getId_Empleado());
 
             int registrosAfectados = stm.executeUpdate();
             if (registrosAfectados > 0) {
@@ -36,14 +37,15 @@ public class AsistenciaDAO {
     }
 
     // Marcar Salida (UPDATE) calculando las horas con MySQL
-    public boolean marcarSalida(int idEmpleado) {
+    public boolean marcarSalida(Asistencia asistencia) {
         boolean actualizado = false;
         String sql = "UPDATE asistencias SET horSalida = CURRENT_TIME(), Totalhr = TIMEDIFF(CURRENT_TIME(), horEntrada) WHERE Id_empleado2 = ? AND Fecha = CURRENT_DATE()";
 
         try (Connection conexion = Conexion.conectar();
              PreparedStatement stm = conexion.prepareStatement(sql)) {
 
-            stm.setInt(1, idEmpleado);
+            // Extraemos el ID del empleado desde el objeto Asistencia
+            stm.setInt(1, asistencia.getId_Empleado());
 
             int registrosAfectados = stm.executeUpdate();
             if (registrosAfectados > 0) {
@@ -60,27 +62,28 @@ public class AsistenciaDAO {
     }
 
     // Buscar asistencias por medio del ID de Asistencia
-    public ArrayList<Asistencia> buscarAsistenciaPorId(int idAsistencia) {
+    public ArrayList<Asistencia> buscarAsistenciaPorId(Asistencia asistencia) {
         ArrayList<Asistencia> asistenciasBD = new ArrayList<>();
         String sql = "SELECT * FROM asistencias WHERE Id_asistencia = ?";
 
         try (Connection conexion = Conexion.conectar();
              PreparedStatement stm = conexion.prepareStatement(sql)) {
 
-            stm.setInt(1, idAsistencia);
+            // Extraemos el ID de asistencia desde el objeto
+            stm.setInt(1, asistencia.getId_Asistencia());
 
             try (ResultSet rs = stm.executeQuery()) {
                 while (rs.next()) {
-                    Asistencia asistencia = new Asistencia();
+                    Asistencia asis = new Asistencia();
 
-                    asistencia.setId_Asistencia(rs.getInt("Id_asistencia"));
-                    asistencia.setFecha(rs.getString("Fecha"));
-                    asistencia.setHoraEntrada(rs.getString("horEntrada"));
-                    asistencia.setHoraSalida(rs.getString("horSalida"));
-                    asistencia.setTotalHr(rs.getString("Totalhr"));
-                    asistencia.setId_Empleado(rs.getInt("Id_empleado2"));
+                    asis.setId_Asistencia(rs.getInt("Id_asistencia"));
+                    asis.setFecha(rs.getString("Fecha"));
+                    asis.setHoraEntrada(rs.getString("horEntrada"));
+                    asis.setHoraSalida(rs.getString("horSalida"));
+                    asis.setTotalHr(rs.getString("Totalhr"));
+                    asis.setId_Empleado(rs.getInt("Id_empleado2"));
 
-                    asistenciasBD.add(asistencia);
+                    asistenciasBD.add(asis);
                 }
             }
         } catch (SQLException err) {
@@ -91,27 +94,28 @@ public class AsistenciaDAO {
     }
 
     // Buscar asistencias por medio de la Fecha
-    public ArrayList<Asistencia> buscarAsistenciaPorFecha(String fecha) {
+    public ArrayList<Asistencia> buscarAsistenciaPorFecha(Asistencia asistencia) {
         ArrayList<Asistencia> asistenciasBD = new ArrayList<>();
         String sql = "SELECT * FROM asistencias WHERE Fecha = ?";
 
         try (Connection conexion = Conexion.conectar();
              PreparedStatement stm = conexion.prepareStatement(sql)) {
 
-            stm.setString(1, fecha);
+            // Extraemos la fecha desde el objeto
+            stm.setString(1, asistencia.getFecha());
 
             try (ResultSet rs = stm.executeQuery()) {
                 while (rs.next()) {
-                    Asistencia asistencia = new Asistencia();
+                    Asistencia asis = new Asistencia();
 
-                    asistencia.setId_Asistencia(rs.getInt("Id_asistencia"));
-                    asistencia.setFecha(rs.getString("Fecha"));
-                    asistencia.setHoraEntrada(rs.getString("horEntrada"));
-                    asistencia.setHoraSalida(rs.getString("horSalida"));
-                    asistencia.setTotalHr(rs.getString("Totalhr"));
-                    asistencia.setId_Empleado(rs.getInt("Id_empleado2"));
+                    asis.setId_Asistencia(rs.getInt("Id_asistencia"));
+                    asis.setFecha(rs.getString("Fecha"));
+                    asis.setHoraEntrada(rs.getString("horEntrada"));
+                    asis.setHoraSalida(rs.getString("horSalida"));
+                    asis.setTotalHr(rs.getString("Totalhr"));
+                    asis.setId_Empleado(rs.getInt("Id_empleado2"));
 
-                    asistenciasBD.add(asistencia);
+                    asistenciasBD.add(asis);
                 }
             }
         } catch (SQLException err) {
@@ -183,16 +187,16 @@ public class AsistenciaDAO {
              ResultSet rs = stm.executeQuery()) {
 
             while (rs.next()) {
-                Asistencia asistencia = new Asistencia();
+                Asistencia asis = new Asistencia();
 
-                asistencia.setId_Asistencia(rs.getInt("Id_asistencia"));
-                asistencia.setFecha(rs.getString("Fecha"));
-                asistencia.setHoraEntrada(rs.getString("horEntrada"));
-                asistencia.setHoraSalida(rs.getString("horSalida"));
-                asistencia.setTotalHr(rs.getString("Totalhr"));
-                asistencia.setId_Empleado(rs.getInt("Id_empleado2"));
+                asis.setId_Asistencia(rs.getInt("Id_asistencia"));
+                asis.setFecha(rs.getString("Fecha"));
+                asis.setHoraEntrada(rs.getString("horEntrada"));
+                asis.setHoraSalida(rs.getString("horSalida"));
+                asis.setTotalHr(rs.getString("Totalhr"));
+                asis.setId_Empleado(rs.getInt("Id_empleado2"));
 
-                asistenciasBD.add(asistencia);
+                asistenciasBD.add(asis);
             }
 
         } catch (SQLException err) {

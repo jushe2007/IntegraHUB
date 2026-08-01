@@ -10,16 +10,18 @@ import java.io.InputStreamReader;
 public class Menu_Sesion {
     private static final BufferedReader leer = new BufferedReader(new InputStreamReader(System.in));
     private static final UsuarioDAO  usuarioDAO = new UsuarioDAO();
+    private static final Usuario usuario = new Usuario();
 
     public static void validarUsuario() throws IOException {
-        System.out.println("Próximamente: Ingresa con tus datos como usuario");
+        System.out.println("\n--- INICIO DE SESIÓN ---");
         System.out.print("Usuario: ");
-        String usuarioInput = leer.readLine();
+        usuario.setUsuario(leer.readLine());
         System.out.print("Contraseña: ");
-        String contrasenaInput = leer.readLine();
-        Usuario usuarioLogueado = usuarioDAO.validarUsuario(usuarioInput, contrasenaInput);
+        usuario.setContrasena(leer.readLine());
+
+        Usuario usuarioLogueado = usuarioDAO.validarUsuario(usuario);
         if (usuarioLogueado != null) {
-            System.out.println("¡Usuario ingresó con éxito!");
+            System.out.println("¡Bienvenido, " + usuarioLogueado.getUsuario() + "! Ingresó con éxito.");
         } else {
             System.out.println("Error: Usuario o contraseña incorrectos.");
         }

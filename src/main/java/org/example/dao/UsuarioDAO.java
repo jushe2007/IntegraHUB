@@ -26,7 +26,6 @@ public class UsuarioDAO {
                 usuario.setUsuario(rs.getString("usuario"));
                 usuario.setContrasena(rs.getString("contrasena"));
                 usuario.setNivel_Pri(rs.getString("nivel_pri"));
-                usuario.setId_Almacen2(rs.getInt("Id_almacen2"));
                 usuario.setId_Empleado1(rs.getInt("Id_empleado1"));
                 usuariosBD.add(usuario);
             }
@@ -58,28 +57,27 @@ public class UsuarioDAO {
     }
 
     // Buscar usuario por nombre o id
-    public ArrayList<Usuario> buscarUsuario(Usuario usuarioex) {
+    public ArrayList<Usuario> buscarUsuario(Usuario usuario) {
         ArrayList<Usuario> usuariosBD = new ArrayList<Usuario>();
         String sql = "SELECT * FROM usuarios WHERE Id_User = ? OR usuario LIKE ?";
 
         try (Connection conexion = Conexion.conectar();
              PreparedStatement stm = conexion.prepareStatement(sql)) {
 
-            stm.setInt(1, usuarioex.getId_User());
-            stm.setString(2, "%" + usuarioex.getUsuario() + "%");
+            stm.setInt(1, usuario.getId_User());
+            stm.setString(2, "%" + usuario.getUsuario() + "%");
 
             try (ResultSet rs = stm.executeQuery()) {
                 while (rs.next()) {
-                    Usuario usuario = new Usuario();
+                    Usuario usu = new Usuario();
 
-                    usuario.setId_User(rs.getInt("Id_User"));
-                    usuario.setUsuario(rs.getString("usuario"));
-                    usuario.setContrasena(rs.getString("contrasena"));
-                    usuario.setNivel_Pri(rs.getString("nivel_pri"));
-                    usuario.setId_Almacen2(rs.getInt("Id_almacen2"));
-                    usuario.setId_Empleado1(rs.getInt("Id_empleado1"));
+                    usu.setId_User(rs.getInt("Id_User"));
+                    usu.setUsuario(rs.getString("usuario"));
+                    usu.setContrasena(rs.getString("contrasena"));
+                    usu.setNivel_Pri(rs.getString("nivel_pri"));
+                    usu.setId_Empleado1(rs.getInt("Id_empleado1"));
 
-                    usuariosBD.add(usuario);
+                    usuariosBD.add(usu);
                 }
             }
 
@@ -91,15 +89,15 @@ public class UsuarioDAO {
     }
 
     // Validar Usuario (Inicio de Sesión)
-    public Usuario validarUsuario(String usuarioInput, String contrasenaInput) {
+    public Usuario validarUsuario(Usuario usuario) {
         Usuario usuarioValido = null;
         String sql = "SELECT * FROM usuarios WHERE usuario = ? AND contrasena = ?";
 
         try (Connection conexion = Conexion.conectar();
              PreparedStatement stm = conexion.prepareStatement(sql)) {
 
-            stm.setString(1, usuarioInput);
-            stm.setString(2, contrasenaInput);
+            stm.setString(1, usuario.getUsuario());
+            stm.setString(2, usuario.getContrasena());
 
             try (ResultSet rs = stm.executeQuery()) {
                 // Si rs.next() es true, significa que el usuario y la contraseña coinciden
@@ -109,7 +107,6 @@ public class UsuarioDAO {
                     usuarioValido.setUsuario(rs.getString("usuario"));
                     usuarioValido.setContrasena(rs.getString("contrasena"));
                     usuarioValido.setNivel_Pri(rs.getString("nivel_pri"));
-                    usuarioValido.setId_Almacen2(rs.getInt("Id_almacen2"));
                     usuarioValido.setId_Empleado1(rs.getInt("Id_empleado1"));
                 }
             }
@@ -124,7 +121,7 @@ public class UsuarioDAO {
     // modificar Usuarios por medio de su id
     public boolean modificarUsuario(Usuario usuario) {
         boolean actualizado = false;
-        String sql = "UPDATE usuarios SET usuario = ?, contrasena = ?, nivel_pri = ?, Id_almacen2 = ?, Id_empleado1 = ? WHERE Id_User = ?";
+        String sql = "UPDATE usuarios SET usuario = ?, contrasena = ?, nivel_pri = ?, Id_empleado1 = ? WHERE Id_User = ?";
 
         try (Connection conexion = Conexion.conectar();
              PreparedStatement stm = conexion.prepareStatement(sql)) {
@@ -132,9 +129,8 @@ public class UsuarioDAO {
             stm.setString(1, usuario.getUsuario());
             stm.setString(2, usuario.getContrasena());
             stm.setString(3, usuario.getNivel_Pri());
-            stm.setInt(4, usuario.getId_Almacen2());
-            stm.setInt(5, usuario.getId_Empleado1());
-            stm.setInt(6, usuario.getId_User());
+            stm.setInt(4, usuario.getId_Empleado1()); // Corregido el índice de parámetros
+            stm.setInt(5, usuario.getId_User());     // Corregido el índice de parámetros
 
             int registrosAfectados = stm.executeUpdate();
             if (registrosAfectados > 0) {
@@ -153,7 +149,7 @@ public class UsuarioDAO {
     // Insertar usuario
     public boolean insertarUsuario(Usuario usuario) {
         boolean insertado = false;
-        String sql = "INSERT INTO usuarios (usuario, contrasena, nivel_pri, Id_almacen2, Id_empleado1) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO usuarios (usuario, contrasena, nivel_pri, Id_empleado1) VALUES (?, ?, ?, ?)";
 
         try (Connection conexion = Conexion.conectar();
              PreparedStatement stm = conexion.prepareStatement(sql)) {
@@ -161,8 +157,7 @@ public class UsuarioDAO {
             stm.setString(1, usuario.getUsuario());
             stm.setString(2, usuario.getContrasena());
             stm.setString(3, usuario.getNivel_Pri());
-            stm.setInt(4, usuario.getId_Almacen2());
-            stm.setInt(5, usuario.getId_Empleado1());
+            stm.setInt(4, usuario.getId_Empleado1());
 
             int registrosAfectados = stm.executeUpdate();
             if (registrosAfectados > 0) {

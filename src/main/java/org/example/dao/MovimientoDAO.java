@@ -1,7 +1,6 @@
 package org.example.dao;
 
 import org.example.Config.Conexion;
-import org.example.modelo.Empleado;
 import org.example.modelo.Movimiento;
 
 import java.sql.Connection;
@@ -87,56 +86,57 @@ public class MovimientoDAO {
     }
 
     // Buscar movimientos
-    public ArrayList<Movimiento> buscarMovimiento(Movimiento movimientoex) {
+    public ArrayList<Movimiento> buscarMovimiento(Movimiento movimiento) {
         ArrayList<Movimiento> movimientosBD = new ArrayList<Movimiento>();
         String sql = "SELECT * FROM movimientos WHERE Cod_movimientos = ?";
 
         try (Connection conexion = Conexion.conectar();
              PreparedStatement stm = conexion.prepareStatement(sql)) {
 
-            stm.setInt(1, movimientoex.getCod_Movimiento());
+            stm.setInt(1, movimiento.getCod_Movimiento());
 
             try (ResultSet rs = stm.executeQuery()) {
                 while (rs.next()) {
-                    Movimiento movimiento = new Movimiento();
+                    Movimiento mov = new Movimiento();
 
-                    movimiento.setCod_Movimiento(rs.getInt("Cod_Movimientos"));
-                    movimiento.setId_Almacen6(rs.getInt("Id_almacen6"));
-                    movimiento.setMovimiento_de_(rs.getString("Movimiento_de_"));
+                    mov.setCod_Movimiento(rs.getInt("Cod_Movimientos"));
+                    mov.setId_Almacen6(rs.getInt("Id_almacen6"));
+                    mov.setMovimiento_de_(rs.getString("Movimiento_de_"));
 
                     // Manejo de id_Cliente1 (puede ser nulo en la BD)
                     int idCliente = rs.getInt("Id_cliente1");
-                    movimiento.setId_Cliente1(rs.wasNull() ? null : idCliente);
+                    mov.setId_Cliente1(rs.wasNull() ? null : idCliente);
 
                     // Manejo de id_Proveedor2 (puede ser nulo en la BD)
                     int idProveedor = rs.getInt("Id_proveedor2");
-                    movimiento.setId_Proveedor2(rs.wasNull() ? null : idProveedor);
+                    mov.setId_Proveedor2(rs.wasNull() ? null : idProveedor);
 
-                    movimiento.setId_Empleado3(rs.getInt("Id_empleado3"));
-                    movimiento.setDescripcion(rs.getString("descripcion"));
+                    mov.setId_Empleado3(rs.getInt("Id_empleado3"));
+                    mov.setDescripcion(rs.getString("descripcion"));
 
                     Date fechRegistro = rs.getDate("Fech_Registro");
                     if (fechRegistro != null) {
-                        movimiento.setFech_Registro(fechRegistro.toLocalDate());
+                        mov.setFech_Registro(fechRegistro.toLocalDate());
                     }
 
                     Date fechOrden = rs.getDate("Fech_Orden");
                     if (fechOrden != null) {
-                        movimiento.setFech_Orden(fechOrden.toLocalDate());
+                        mov.setFech_Orden(fechOrden.toLocalDate());
                     }
 
                     Date fechConcluido = rs.getDate("Fech_Concluido");
-                    movimiento.setFech_Concluido(fechConcluido != null ? fechConcluido.toLocalDate() : null);
+                    mov.setFech_Concluido(fechConcluido != null ? fechConcluido.toLocalDate() : null);
 
-                    movimiento.setCalificacion(rs.getInt("Calificacion"));
-                    movimiento.setDesc_Calificacion(rs.getString("desc_Calificacion"));
+                    mov.setCalificacion(rs.getInt("Calificacion"));
+                    mov.setDesc_Calificacion(rs.getString("desc_Calificacion"));
 
-                    movimientosBD.add(movimiento);
+                    movimientosBD.add(mov);
                 }
             }
 
         } catch (SQLException err) {
-            System.err.println("Error al buscar al cliente: " + err.getMessage());
+            // Se corrigió el mensaje de error de "cliente" a "movimiento"
+            System.err.println("Error al buscar el movimiento: " + err.getMessage());
         }
 
         return movimientosBD;
