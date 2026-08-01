@@ -2,23 +2,21 @@ package org.example.modelo;
 
 public class Detalle_Movimiento {
 
-    // asignacion de atributos
+    // asignacion de atributos (Todos se ponen nulos para evitar problemas)
     private int id_Detalle = 0;
     private int cod_Movimientos1 = 0;
     private int id_Producto1 = 0;
-    private int id_Almacen7;
     private float cantidad = 0;
     
     // constructores (vacio / con atributos )
     public Detalle_Movimiento() {
     }
  
-        public Detalle_Movimiento(int id_Detalle, int cod_Movimientos1, int id_Producto1, float cantidad, int Id_Almacen7) {
+        public Detalle_Movimiento(int id_Detalle, int cod_Movimientos1, int id_Producto1, float cantidad) {
         setId_Detalle(id_Detalle);
         setCod_Movimientos1(cod_Movimientos1);
         setId_Producto1(id_Producto1);
         setCantidad(cantidad);
-        setId_Almacen7(Id_Almacen7);
     }
 
     // geters (formatos) y setters (condiciones para guardar)
@@ -56,14 +54,6 @@ public class Detalle_Movimiento {
         return (float) Double.parseDouble(precioFormato);
     }
 
-    public int getId_Almacen7() {
-        return id_Almacen7;
-    }
-
-    public void setId_Almacen7(int id_Almacen7) {
-        this.id_Almacen7 = id_Almacen7;
-    }
-
     public void setCantidad(float cantidad) {
         if (cantidad >= 0) {
             this.cantidad = cantidad;
@@ -78,7 +68,6 @@ public class Detalle_Movimiento {
             return  "id de detalle:            " + getId_Detalle() + "\n" +
                     "codigo del Movimientos:   " + getCod_Movimientos1() + "\n" +
                     "id del Producto:          " + getId_Producto1() + "\n" +
-                    "id del Almacen:           " + getId_Almacen7() + "\n" +
                     "cantidad:                 " + getCantidad();
         }
 }

@@ -2,7 +2,7 @@ package org.example.modelo;
 
 public class Empleado extends Persona implements Calificador, Gestionable, Operable{
 
-    // asignacion de atributos
+    // asignacion de atributos (Todos se ponen nulos para evitar problemas)
     private int id_Empleado = 0;
     private String puesto = "";
     private String area = "";

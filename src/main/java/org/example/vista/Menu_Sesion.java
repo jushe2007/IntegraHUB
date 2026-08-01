@@ -10,8 +10,6 @@ import java.io.InputStreamReader;
 public class Menu_Sesion {
     private static final BufferedReader leer = new BufferedReader(new InputStreamReader(System.in));
     private static final UsuarioDAO  usuarioDAO = new UsuarioDAO();
-    private static final Usuario usuario = new Usuario();
-
 
     public static void validarUsuario() throws IOException {
         System.out.println("Próximamente: Ingresa con tus datos como usuario");
@@ -47,7 +45,7 @@ public class Menu_Sesion {
                 switch (opcion) {
                     case 1: validarUsuario() ; break;
                     case 2: sinUsuario(); break;
-                    case 3: Menu_Inicio.menu(); break;
+                    case 3: opcion = 4; Menu_Inicio.menu(); break;
                     case 4: System.out.println("Saliendo del sistema..."); break;
                     default: System.out.println("Opción no válida"); break;
                 }

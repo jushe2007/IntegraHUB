@@ -1,7 +1,7 @@
 package org.example.modelo;
 
 public class Almacen {
-    // asignacion de atributos
+    // asignacion de atributos (Todos se ponen nulos para evitar problemas)
     private int id_Almacen = 0;
     private String zona = "";
     private int piso = 0;

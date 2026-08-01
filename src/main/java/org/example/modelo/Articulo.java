@@ -2,7 +2,7 @@ package org.example.modelo;
 
 public class Articulo {
 
-    // asignacion de atributo
+    // asignacion de atributos (Todos se ponen nulos para evitar problemas)
     private int id_Producto = 0;
     private String tipoProducto = "";
     private String nombre = "";

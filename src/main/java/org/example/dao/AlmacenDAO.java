@@ -1,9 +1,6 @@
 package org.example.dao;
-
-
 import org.example.Config.Conexion;
 import org.example.modelo.Almacen;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,10 +8,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class AlmacenDAO {
-    // Extrae todos los datos de la tabla Almacen
+    // Extrae todos los datos de la tabla Almacen (Mostrar)
     public ArrayList<Almacen> extraerAlmacen() {
         ArrayList<Almacen> almacenesBD = new ArrayList<Almacen>();
-        String sql = "SELECT * FROM almacen";
+        String sql = "SELECT * FROM almacen"; //()
+        
+        //Se pone try para que de igual forma lo pruebe 
         try (Connection conexion = Conexion.conectar();
              PreparedStatement stm = conexion.prepareStatement(sql);
              ResultSet rs = stm.executeQuery()) {

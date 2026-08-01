@@ -7,19 +7,17 @@ public class Usuario {
     private String usuario = "";
     private String contrasena = "";
     private String nivel_Pri = "";
-    private int id_Almacen2 = 0;
     private int id_Empleado1 = 0;
 
     // constructores (vacio / con atributos )
     public Usuario() {
     }
 
-    public Usuario(int id_User, String usuario, String contrasena, String nivel_Pri, int id_Almacen2, int id_Empleado1) {
+    public Usuario(int id_User, String usuario, String contrasena, String nivel_Pri, int id_Empleado1) {
         setId_User(id_User);
         setUsuario(usuario);
         setContrasena(contrasena);
         setNivel_Pri(nivel_Pri);
-        setId_Almacen2(id_Almacen2);
         setId_Empleado1(id_Empleado1);
     }
 
@@ -82,18 +80,6 @@ public class Usuario {
         this.nivel_Pri = nivel_Pri;
     }
 
-    public int getId_Almacen2() {
-        return id_Almacen2;
-    }
-
-    public void setId_Almacen2(int id_Almacen2) {
-        if (id_Almacen2 > 0) {
-            this.id_Almacen2 = id_Almacen2;
-        }else {
-            System.out.println("El id no debe ser menor a 0");
-        }
-    }
-
     public int getId_Empleado1() {
         return id_Empleado1;
     }
@@ -113,7 +99,6 @@ public class Usuario {
                 "Usuario: " + getUsuario() + '\n' +
                 "Contraseña: " + getContrasena() + '\n' +
                 "Nivel de privilegios: " + getNivel_Pri() + '\n' +
-                "Id Almacen: " + getId_Almacen2() + '\n' +
                 "Id Empleado: " + getId_Empleado1();
     }
 }

@@ -2,7 +2,7 @@ package org.example.modelo;
 
 public class Cliente extends Persona implements Calificador {
     
-    // asignacion de atruibuto
+    // asignacion de atributos (Todos se ponen nulos para evitar problemas)
     private int id_Cliente = 0;
     private int id_Almacen3 = 0;
 

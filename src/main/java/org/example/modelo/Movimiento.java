@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 
 public class Movimiento {
 
-    // asignacion de atributos
+    // asignacion de atributos (Todos se ponen nulos para evitar problemas)
     private int cod_Movimiento = 0;
     private int id_Almacen6 = 0;
     private String movimiento_de_ = "";

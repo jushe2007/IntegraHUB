@@ -21,7 +21,7 @@ public class Menu_Inicio {
             try {
                 opcion = Integer.parseInt(leer.readLine());
                 switch (opcion) {
-                    //case 1: opcion =4; MenuAlumno.menu() ; break;
+                    case 1: opcion =4; Menu_Sesion.menu() ; break;
                     //case 2: opcion =4; MenuProfesor.menu(); break;
                    // case 3: mostrarComunidadUniversitaria(); break;
                     case 4: System.out.println("Saliendo del sistema..."); break;
