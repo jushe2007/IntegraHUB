@@ -1,7 +1,6 @@
 package org.example.dao;
 
 import org.example.Config.Conexion;
-// Import eliminado por no ser utilizado: import org.example.modelo.Cliente;
 import org.example.modelo.Empleado;
 
 import java.sql.Connection;
