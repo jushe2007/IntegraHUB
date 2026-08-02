@@ -89,7 +89,7 @@ public class Menu_Consultas {
         Asistencia asistenciaHoy = asistenciaDAO.obtenerAsistenciaHoyPorEmpleado(asistencia);
 
         if (asistenciaHoy == null) {
-            System.out.println("❌ Aún no tienes ningún registro de asistencia el día de hoy.");
+            System.out.println("Aún no tienes ningún registro de asistencia el día de hoy.");
         } else {
             System.out.println("\n--- ESTADO DE ASISTENCIA ---");
             System.out.println("Fecha: " + asistenciaHoy.getFecha());
