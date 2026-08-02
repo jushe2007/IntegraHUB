@@ -22,6 +22,7 @@ public class Menu_Sesion {
         Usuario usuarioLogueado = usuarioDAO.validarUsuario(usuario);
         if (usuarioLogueado != null) {
             System.out.println("¡Bienvenido, " + usuarioLogueado.getUsuario() + "! Ingresó con éxito.");
+            Menu_Admin.menu();
         } else {
             System.out.println("Error: Usuario o contraseña incorrectos.");
         }

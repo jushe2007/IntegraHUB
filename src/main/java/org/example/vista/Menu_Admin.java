@@ -11,7 +11,7 @@ public class Menu_Admin {
         int opcion = 0;
 
         while (opcion != 11) {
-            System.out.println("\n--- MENÚ DE INICIO ---");
+            System.out.println("\n--- MENÚ DE ADMINISTRADOR ---");
             System.out.println("1. MENU DE ALMACEN");
             System.out.println("2. MENU DE ARTICULOS");
             System.out.println("3. MENU DE ASISTENCIAS");
@@ -29,34 +29,34 @@ public class Menu_Admin {
                 opcion = Integer.parseInt(leer.readLine());
                 switch (opcion) {
                     case 1:
-                        Menu_Sesion.menu();
+                        Menu_Almacen.menu();
                         break;
                     case 2:
-                        Menu_Consultas.menu();
+                        Menu_Articulo.menu();
                         break;
                     case 3:
-                        Menu_Asistencias.menu();
+                        Menu_Asistencia.menu();
                         break;
                     case 4:
-                        Menu_Asistencias.menu();
+                        Menu_Cliente.menu();
                         break;
                     case 5:
-                        Menu_Asistencias.menu();
+                        Menu_Detalles.menu();
                         break;
                     case 6:
-                        Menu_Asistencias.menu();
+                        Menu_Empleado.menu();
                         break;
                     case 7:
-                        Menu_Asistencias.menu();
+                        Menu_Movimiento.menu();
                         break;
                     case 8:
-                        Menu_Asistencias.menu();
+                        Menu_Proveedor.menu();
                         break;
                     case 9:
-                        Menu_Asistencias.menu();
+                        Menu_Usuario.menu();
                         break;
                     case 10:
-                        Menu_Asistencias.menu();
+                        Menu_Inicio.menu();
                         break;
                     case 11:
                         System.exit(0);
