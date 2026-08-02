@@ -22,7 +22,13 @@ public class Menu_Sesion {
         Usuario usuarioLogueado = usuarioDAO.validarUsuario(usuario);
         if (usuarioLogueado != null) {
             System.out.println("¡Bienvenido, " + usuarioLogueado.getUsuario() + "! Ingresó con éxito.");
-            Menu_Admin.menu();
+            if (usuarioLogueado.getNivel_Pri().equals("administrador")) {
+                Menu_Admin.menu();
+            }else if (usuarioLogueado.getNivel_Pri().equals("encargado")) {
+                Menu_Encargado.menu();
+            }else if (usuarioLogueado.getNivel_Pri().equals("empleado") || usuarioLogueado.getNivel_Pri().equals(null)) {
+                Menu_Consultas.menu();
+            }
         } else {
             System.out.println("Error: Usuario o contraseña incorrectos.");
         }

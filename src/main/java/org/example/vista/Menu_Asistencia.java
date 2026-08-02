@@ -119,7 +119,7 @@ public class Menu_Asistencia {
                     case 5: buscarPorFecha(); break;
                     case 6: modificar(); break;
                     case 7: borrar(); break;
-                    case 8: opcion = 9; /* Menu.menu(); */ break;
+                    case 8: opcion = 9; break;
                     case 9: System.out.println("Saliendo del sistema..."); break;
                     default: System.out.println("Opción no válida"); break;
                 }

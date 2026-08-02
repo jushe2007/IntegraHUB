@@ -119,7 +119,7 @@ public class Menu_Proveedor {
                     case 3: modificar(); break;
                     case 4: borrar(); break;
                     case 5: buscar(); break;
-                    case 6: opcion = 7; /* Menu.menu(); */ break;
+                    case 6: opcion = 7; break;
                     case 7: System.out.println("Saliendo del sistema..."); break;
                     default: System.out.println("Opción no válida"); break;
                 }

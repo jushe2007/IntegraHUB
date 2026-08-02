@@ -21,7 +21,7 @@ public class Menu_Admin {
             System.out.println("7. MENU DE MOVIMIENTOS");
             System.out.println("8. MENU DE PROVEEDORES");
             System.out.println("9. MENU DE USUARIOS");
-            System.out.println("10. MENU DE CERRAR SESION");
+            System.out.println("10. CERRAR SESION");
             System.out.println("11. SALIR");
             System.out.print("Selecciona una opción: ");
 

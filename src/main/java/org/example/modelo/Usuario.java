@@ -3,11 +3,15 @@ package org.example.modelo;
 public class Usuario {
 
     // asignacion de atributos
-    private int id_User = 0 ;
+    private int id_User = 0;
     private String usuario = "";
     private String contrasena = "";
     private String nivel_Pri = "";
     private int id_Empleado1 = 0;
+
+    // validar niver de privilegios
+    private static final String[] PRIVILEGIOS_VALIDOS = {"administrador", "encargado", "empleado", null};
+
 
     // constructores (vacio / con atributos )
     public Usuario() {
@@ -29,16 +33,16 @@ public class Usuario {
     }
 
     public void setId_User(int id_User) {
-        if (id_User >0 ) {
+        if (id_User > 0) {
             this.id_User = id_User;
-        }else {
+        } else {
             System.out.println("El id no debe ser menor a 0");
         }
     }
 
     public String getUsuario() {
         String usuarioFormato = "";
-        if(this.usuario!=null){
+        if (this.usuario != null) {
             usuarioFormato = this.usuario.toLowerCase();
         }
         return usuarioFormato;
@@ -54,7 +58,7 @@ public class Usuario {
 
     public String getContrasena() {
         String contrasenaFormato = "";
-        if(this.contrasena != null){
+        if (this.contrasena != null) {
             contrasenaFormato = this.contrasena;
         }
         return contrasenaFormato;
@@ -74,10 +78,16 @@ public class Usuario {
             nivel_PriFormato = this.nivel_Pri.toLowerCase();
         }
         return nivel_PriFormato;
+
     }
 
     public void setNivel_Pri(String nivel_Pri) {
-        this.nivel_Pri = nivel_Pri;
+        if (ValidarPrivilegio(nivel_Pri)) {
+            this.nivel_Pri = nivel_Pri;
+        } else {
+            System.out.println("Nivel de privilegios no valido");
+        }
+
     }
 
     public int getId_Empleado1() {
@@ -87,7 +97,7 @@ public class Usuario {
     public void setId_Empleado1(int id_Empleado1) {
         if (id_Empleado1 > 0) {
             this.id_Empleado1 = id_Empleado1;
-        }else {
+        } else {
             System.out.println("El id no debe ser menor a 0");
         }
     }
@@ -101,4 +111,20 @@ public class Usuario {
                 "Nivel de privilegios: " + getNivel_Pri() + '\n' +
                 "Id Empleado: " + getId_Empleado1();
     }
+
+    // Validar nivel de privilegios
+    public boolean ValidarPrivilegio(String privilegio) {
+        if (privilegio == null) {
+            return false;
+        }
+        for (String validar : PRIVILEGIOS_VALIDOS) {
+            if (validar != null && privilegio.equalsIgnoreCase(validar)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
+
+
+

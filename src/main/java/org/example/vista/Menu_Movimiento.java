@@ -177,7 +177,7 @@ public class Menu_Movimiento {
                     case 4: borrar(); break;
                     case 5: buscar(); break;
                     case 6: buscarPorFecha(); break;
-                    case 7: opcion = 8; /* Menu.menu(); */ break;
+                    case 7: opcion = 8; break;
                     case 8: System.out.println("Saliendo del sistema..."); break;
                     default: System.out.println("Opción no válida"); break;
                 }

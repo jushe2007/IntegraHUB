@@ -209,7 +209,7 @@ public class Menu_Consultas {
                         consultaMiAsistencia();
                         break;
                     case 4:
-                        return; // Regresa al menú de inicio
+                        return;
                     case 5:
                         System.out.println("Saliendo del sistema...");
                         System.exit(0);
