@@ -90,11 +90,11 @@ public class Asistencia {
     //Generamos el toString para mostrar los datos
     @Override
     public String toString() {
-        return "id_Asistencia = " + getId_Asistencia() + "\n" +
-                "id_Empleado   = " + getId_Empleado() + "\n" +
-                "fecha         = " + getFecha() + "\n" +
-                "horaEntrada   = " + getHoraEntrada() + "\n" +
-                "horaSalida    = " + getHoraSalida() + "\n" +
-                "totalHr       = " + getTotalHr();
+        return "id_Asistencia:   " + getId_Asistencia() + "\n" +
+                "id_Empleado:    " + getId_Empleado() + "\n" +
+                "fecha:          " + getFecha() + "\n" +
+                "horaEntrada:    " + getHoraEntrada() + "\n" +
+                "horaSalida:     " + getHoraSalida() + "\n" +
+                "totalHr:        " + getTotalHr();
     }
 }

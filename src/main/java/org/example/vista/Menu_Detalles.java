@@ -29,6 +29,7 @@ public class Menu_Detalles {
         System.out.println("--- Lista de detalles de movimiento registrados ---");
         ArrayList<Detalle_Movimiento> detalles = detalleMovimientoDAO.extraerDetalle_Movimiento();
         for (Detalle_Movimiento d : detalles) {
+            System.out.println("-------------------------------");
             System.out.println(d);
         }
     }
@@ -69,6 +70,7 @@ public class Menu_Detalles {
             System.out.println("No se encontraron detalles para ese código de movimiento.");
         } else {
             for (Detalle_Movimiento d : detalles) {
+                System.out.println("-------------------------------");
                 System.out.println(d);
             }
         }

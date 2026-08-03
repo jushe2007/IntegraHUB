@@ -40,6 +40,7 @@ public class Menu_Proveedor {
         System.out.println("--- Lista de proveedores registrados ---");
         ArrayList<Proveedor> proveedores = proveedorDAO.extraerProveedores();
         for (Proveedor p : proveedores) {
+            System.out.println("-------------------------------");
             System.out.println(p);
         }
     }
@@ -92,6 +93,7 @@ public class Menu_Proveedor {
             System.out.println("No se encontró ningún proveedor con esos criterios.");
         } else {
             for (Proveedor p : proveedores) {
+                System.out.println("-------------------------------");
                 System.out.println(p);
             }
         }

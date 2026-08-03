@@ -56,7 +56,7 @@ public class Menu_Admin {
                         Menu_Usuario.menu();
                         break;
                     case 10:
-                        Menu_Inicio.menu();
+                        Menu_Sesion.menu();
                         break;
                     case 11:
                         System.exit(0);

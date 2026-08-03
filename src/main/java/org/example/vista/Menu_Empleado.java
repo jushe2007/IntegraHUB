@@ -42,6 +42,7 @@ public class Menu_Empleado {
         System.out.println("--- Lista de empleados registrados ---");
         ArrayList<Empleado> empleados = empleadoDAO.extraerEmpleados();
         for (Empleado e : empleados) {
+            System.out.println("-------------------------------");
             System.out.println(e);
         }
     }
@@ -95,6 +96,7 @@ public class Menu_Empleado {
             System.out.println("No se encontró ningún empleado con ese ID.");
         } else {
             for (Empleado e : empleados) {
+                System.out.println("-------------------------------");
                 System.out.println(e);
             }
         }

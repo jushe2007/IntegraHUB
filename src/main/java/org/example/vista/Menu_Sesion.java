@@ -21,7 +21,7 @@ public class Menu_Sesion {
 
         Usuario usuarioLogueado = usuarioDAO.validarUsuario(usuario);
         if (usuarioLogueado != null) {
-            System.out.println("¡Bienvenido, " + usuarioLogueado.getUsuario() + "! Ingresó con éxito.");
+            System.out.println("¡Bienvenido, " + usuarioLogueado.getUsuario() + "  /" + usuarioLogueado.getNivel_Pri() + "! Ingresó con éxito.");
             if (usuarioLogueado.getNivel_Pri().equals("administrador")) {
                 Menu_Admin.menu();
             }else if (usuarioLogueado.getNivel_Pri().equals("encargado")) {
@@ -35,7 +35,7 @@ public class Menu_Sesion {
     }
 
     public static void sinUsuario() throws IOException {
-        System.out.println("Porfavor dile a tu encargado de turno que requierenun usuario");
+        System.out.println("Porfavor dile a tu encargado de turno que requieres un usuario para entrar");
     }
 
     public static void menu() throws IOException {

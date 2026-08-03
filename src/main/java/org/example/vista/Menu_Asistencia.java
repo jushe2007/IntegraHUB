@@ -33,6 +33,7 @@ public class Menu_Asistencia {
         System.out.println("--- Lista de todas las asistencias ---");
         ArrayList<Asistencia> asistencias = asistenciaDAO.extraerAsistencia();
         for (Asistencia a : asistencias) {
+            System.out.println("-------------------------------");
             System.out.println(a);
         }
     }
@@ -47,6 +48,7 @@ public class Menu_Asistencia {
             System.out.println("No se encontró ninguna asistencia con ese ID.");
         } else {
             for (Asistencia a : asistencias) {
+                System.out.println("-------------------------------");
                 System.out.println(a);
             }
         }
@@ -62,6 +64,7 @@ public class Menu_Asistencia {
             System.out.println("No se encontraron asistencias en esa fecha.");
         } else {
             for (Asistencia a : asistencias) {
+                System.out.println("-------------------------------");
                 System.out.println(a);
             }
         }

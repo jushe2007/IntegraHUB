@@ -79,10 +79,10 @@ public class Almacen {
 
     @Override
     public String toString() {
-        return "id_Almacen  =" + getId_Almacen() + "\n" +
-                "zona        =" + getZona() + "\n" +
-                "piso        =" + getPiso() + "\n" +
-                "direccion   =" + getDireccion();
+        return "id_Almacen: " + getId_Almacen() + "\n" +
+                "zona: " + getZona() + "\n" +
+                "piso: " + getPiso() + "\n" +
+                "direccion: " + getDireccion();
     }
 
 }

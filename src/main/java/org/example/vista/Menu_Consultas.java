@@ -27,6 +27,7 @@ public class Menu_Consultas {
         articulo.setNombre(leer.readLine().trim());
         ArrayList<Articulo> articulos = articuloDAO.buscarArticulo(articulo);
         for (Articulo art : articulos) {
+            System.out.println("-------------------------------");
             System.out.println(art);
         }
     }
@@ -38,6 +39,7 @@ public class Menu_Consultas {
         articulo.setId_Producto(Integer.parseInt(leer.readLine().trim()));
         ArrayList<Articulo> articulos = articuloDAO.buscarArticulo(articulo);
         for (Articulo art : articulos) {
+            System.out.println("-------------------------------");
             System.out.println(art);
         }
     }
@@ -50,6 +52,7 @@ public class Menu_Consultas {
         movimiento.setCod_Movimiento(Integer.parseInt(leer.readLine().trim()));
         ArrayList<Movimiento> movimientos = movimientoDAO.buscarMovimiento(movimiento);
         for (Movimiento mov : movimientos) {
+            System.out.println("-------------------------------");
             System.out.println(mov);
         }
     }
@@ -62,6 +65,7 @@ public class Menu_Consultas {
         // Llamada directa pasando el LocalDate
         ArrayList<Movimiento> movimientos = movimientoDAO.buscarMovimientoPorFecha(fechareg);
         for (Movimiento mov : movimientos) {
+            System.out.println("-------------------------------");
             System.out.println(mov);
         }
     }
@@ -78,7 +82,7 @@ public class Menu_Consultas {
         }
     }
 
-    // Se confirma si marcaste asistencia 0 ya saliste
+    // Se confirma si marcaste asistencia o ya saliste
     public static void consultaMiAsistencia() throws IOException {
         System.out.println("\n--- CONSULTAR MI ASISTENCIA DE HOY ---");
         System.out.print("Introduce el ID del empleado: ");
@@ -88,7 +92,7 @@ public class Menu_Consultas {
         // Llamamos al DAO para verificar el registro de hoy
         Asistencia asistenciaHoy = asistenciaDAO.obtenerAsistenciaHoyPorEmpleado(asistencia);
 
-        if (asistenciaHoy == null) {
+        if (asistenciaHoy.getFecha().isEmpty() || asistenciaHoy.getFecha() == null) {
             System.out.println("Aún no tienes ningún registro de asistencia el día de hoy.");
         } else {
             System.out.println("\n--- ESTADO DE ASISTENCIA ---");

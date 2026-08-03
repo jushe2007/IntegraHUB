@@ -31,6 +31,7 @@ import java.util.ArrayList;
             System.out.println("--- Lista de almacenes registrados ---");
             ArrayList<Almacen> almacenes = almacenDAO.extraerAlmacen();
             for (Almacen a : almacenes) {
+                System.out.println("-------------------------------");
                 System.out.println(a);
             }
         }

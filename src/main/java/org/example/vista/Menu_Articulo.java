@@ -97,6 +97,7 @@ public class Menu_Articulo {
             System.out.println("No se encontró ningún artículo con esos criterios.");
         } else {
             for (Articulo a : articulos) {
+                System.out.println("-------------------------------");
                 System.out.println(a);
             }
         }

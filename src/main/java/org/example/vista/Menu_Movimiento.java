@@ -61,6 +61,7 @@ public class Menu_Movimiento {
         System.out.println("--- Lista de movimientos registrados ---");
         ArrayList<Movimiento> movimientos = movimientoDAO.extraerMovimientos();
         for (Movimiento m : movimientos) {
+            System.out.println("-------------------------------");
             System.out.println(m);
         }
     }
@@ -129,6 +130,7 @@ public class Menu_Movimiento {
             System.out.println("No se encontró ningún movimiento con ese código.");
         } else {
             for (Movimiento m : movimientos) {
+                System.out.println("-------------------------------");
                 System.out.println(m);
             }
         }
@@ -145,6 +147,7 @@ public class Menu_Movimiento {
                 System.out.println("No se encontraron movimientos en esa fecha.");
             } else {
                 for (Movimiento m : movimientos) {
+                    System.out.println("-------------------------------");
                     System.out.println(m);
                 }
             }

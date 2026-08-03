@@ -36,6 +36,7 @@ public class Menu_Cliente {
         System.out.println("--- Lista de clientes registrados ---");
         ArrayList<Cliente> clientes = clienteDAO.extraerCliente();
         for (Cliente c : clientes) {
+            System.out.println("-------------------------------");
             System.out.println(c);
         }
     }
@@ -81,6 +82,7 @@ public class Menu_Cliente {
             System.out.println("No se encontró ningún cliente con ese ID.");
         } else {
             for (Cliente c : clientes) {
+                System.out.println("-------------------------------");
                 System.out.println(c);
             }
         }

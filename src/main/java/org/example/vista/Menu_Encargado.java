@@ -18,7 +18,7 @@ public class Menu_Encargado {
             System.out.println("4. MENU DE DETALLES DE MOVIMIENTOS");
             System.out.println("5. MENU DE MOVIMIENTOS");
             System.out.println("6. MENU DE PROVEEDORES");
-            System.out.println("7. MENU DE CERRAR SESION");
+            System.out.println("7. CERRAR SESION");
             System.out.println("8. SALIR");
             System.out.print("Selecciona una opción: ");
 
@@ -44,7 +44,7 @@ public class Menu_Encargado {
                         Menu_Proveedor.menu();
                         break;
                     case 7:
-                        Menu_Inicio.menu();
+                        Menu_Sesion.menu();
                         break;
                     case 8:
                         System.exit(0);

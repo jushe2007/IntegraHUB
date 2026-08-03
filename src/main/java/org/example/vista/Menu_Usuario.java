@@ -31,6 +31,7 @@ public class Menu_Usuario {
         System.out.println("--- Lista de usuarios registrados ---");
         ArrayList<Usuario> usuarios = usuarioDAO.extraerUsuarios();
         for (Usuario u : usuarios) {
+            System.out.println("-------------------------------");
             System.out.println(u);
         }
     }
@@ -76,6 +77,7 @@ public class Menu_Usuario {
             System.out.println("No se encontró ningún usuario con esos criterios.");
         } else {
             for (Usuario u : usuarios) {
+                System.out.println("-------------------------------");
                 System.out.println(u);
             }
         }
