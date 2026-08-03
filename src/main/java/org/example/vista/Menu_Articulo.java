@@ -41,6 +41,7 @@ public class Menu_Articulo {
         System.out.println("--- Lista de artículos registrados ---");
         ArrayList<Articulo> articulos = articuloDAO.extraerArticulo();
         for (Articulo a : articulos) {
+            System.out.println("-------------------------------");
             System.out.println(a);
         }
     }
