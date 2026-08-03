@@ -134,12 +134,17 @@ public class Movimiento {
         }
     }
 
-    public String getFech_Registro() {
+    // --- Métodos para la vista / toString (Devuelven String formateado) ---
+    public String getFech_RegistroFormateada() {
         if (this.fech_Registro != null) {
             DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yy");
             return this.fech_Registro.format(formato);
         }
         return "Fecha no asignada";
+    }
+
+    public LocalDate getFech_Registro() {
+        return fech_Registro; // Devuelve el LocalDate original que tus DAOs necesitan
     }
 
     public void setFech_Registro(LocalDate fech_Registro) {

@@ -299,21 +299,21 @@ public class MovimientoDAO {
             stm.setInt(6, movimiento.getId_Empleado3());
             stm.setString(7, movimiento.getDescripcion());
 
-            // Manejo de Fech_Registro
+            // Manejo seguro de Fech_Registro
             if (movimiento.getFech_Registro() != null) {
                 stm.setDate(8, java.sql.Date.valueOf(movimiento.getFech_Registro()));
             } else {
                 stm.setNull(8, java.sql.Types.DATE);
             }
 
-            // Manejo de Fech_Orden
+// Manejo seguro de Fech_Orden
             if (movimiento.getFech_Orden() != null) {
                 stm.setDate(9, java.sql.Date.valueOf(movimiento.getFech_Orden()));
             } else {
                 stm.setNull(9, java.sql.Types.DATE);
             }
 
-            // Manejo de Fech_Concluido
+// Manejo seguro de Fech_Concluido
             if (movimiento.getFech_Concluido() != null) {
                 stm.setDate(10, java.sql.Date.valueOf(movimiento.getFech_Concluido()));
             } else {

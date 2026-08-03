@@ -29,7 +29,7 @@ public class EmpleadoDAO {
                 empleado.setTel2(rs.getString("Tel2")); // Puede recibir nulo directamente
                 empleado.setPuesto(rs.getString("Puesto"));
                 empleado.setArea(rs.getString("Area"));
-                empleado.setDireccion(rs.getString("Dirección"));
+                empleado.setDireccion(rs.getString("Direccion"));
                 empleado.setRfc(rs.getString("Rfc"));
                 empleado.setCurp(rs.getString("Curp"));
                 empleado.setId_Almacen1(rs.getInt("Id_almacen1"));
@@ -84,7 +84,7 @@ public class EmpleadoDAO {
                     emp.setTel2(rs.getString("Tel2")); // Puede recibir nulo directamente
                     emp.setPuesto(rs.getString("Puesto"));
                     emp.setArea(rs.getString("Area"));
-                    emp.setDireccion(rs.getString("Dirección"));
+                    emp.setDireccion(rs.getString("Direccion"));
                     emp.setRfc(rs.getString("Rfc")); // Nota: Se estandarizó 'Rfc' para coincidir con la base de datos
                     emp.setCurp(rs.getString("Curp"));
                     emp.setId_Almacen1(rs.getInt("Id_almacen1"));

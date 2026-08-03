@@ -77,7 +77,7 @@ public class ProveedorDAO {
 
                     prov.setId_Proveedor(rs.getInt("Id_proveedor"));
                     prov.setNombre(rs.getString("Nombre"));
-                    prov.setDireccion(rs.getString("Dirección"));
+                    prov.setDireccion(rs.getString("Direccion"));
                     prov.setEspecialidad(rs.getString("Especialidad"));
                     prov.setTel1(rs.getString("Tel1"));
                     prov.setTel2(rs.getString("Tel2"));
