@@ -13,10 +13,11 @@ import java.util.ArrayList;
 public class Menu_Movimiento {
     private static final BufferedReader leer = new BufferedReader(new InputStreamReader(System.in));
     private static final MovimientoDAO movimientoDAO = new MovimientoDAO();
-    private static final Movimiento movimiento = new Movimiento();
 
     public static void insertar() throws IOException {
         System.out.println("--- Registrar nuevo movimiento ---");
+        Movimiento movimiento = new Movimiento();
+
         System.out.println("Código de Movimiento: ");
         movimiento.setCod_Movimiento(Integer.parseInt(leer.readLine()));
         System.out.println("ID Almacén: ");
@@ -37,11 +38,11 @@ public class Menu_Movimiento {
         System.out.println("Descripción: ");
         movimiento.setDescripcion(leer.readLine());
 
-        System.out.println("Fecha de Registro (YYYY-MM-DD, opcional): ");
+        System.out.println("Fecha de Registro (YYYY-MM-DD): ");
         String regStr = leer.readLine();
         movimiento.setFech_Registro(regStr.isEmpty() ? null : LocalDate.parse(regStr));
 
-        System.out.println("Fecha de Orden (YYYY-MM-DD, opcional): ");
+        System.out.println("Fecha de Orden (YYYY-MM-DD): ");
         String ordenStr = leer.readLine();
         movimiento.setFech_Orden(ordenStr.isEmpty() ? null : LocalDate.parse(ordenStr));
 
@@ -68,6 +69,8 @@ public class Menu_Movimiento {
 
     public static void modificar() throws IOException {
         System.out.println("--- Modificar movimiento por Código ---");
+        Movimiento movimiento = new Movimiento();
+
         System.out.println("Código del movimiento a modificar: ");
         movimiento.setCod_Movimiento(Integer.parseInt(leer.readLine()));
         System.out.println("Nuevo ID Almacén: ");
@@ -88,11 +91,11 @@ public class Menu_Movimiento {
         System.out.println("Nueva Descripción: ");
         movimiento.setDescripcion(leer.readLine());
 
-        System.out.println("Nueva Fecha de Registro (YYYY-MM-DD, opcional): ");
+        System.out.println("Nueva Fecha de Registro (YYYY-MM-DD): ");
         String regStr = leer.readLine();
         movimiento.setFech_Registro(regStr.isEmpty() ? null : LocalDate.parse(regStr));
 
-        System.out.println("Nueva Fecha de Orden (YYYY-MM-DD, opcional): ");
+        System.out.println("Nueva Fecha de Orden (YYYY-MM-DD): ");
         String ordenStr = leer.readLine();
         movimiento.setFech_Orden(ordenStr.isEmpty() ? null : LocalDate.parse(ordenStr));
 
@@ -110,6 +113,8 @@ public class Menu_Movimiento {
 
     public static void borrar() throws IOException {
         System.out.println("--- Borrar movimiento por Código ---");
+        Movimiento movimiento = new Movimiento();
+
         System.out.println("Código del movimiento a borrar: ");
         movimiento.setCod_Movimiento(Integer.parseInt(leer.readLine()));
         boolean borrado = movimientoDAO.borrarMovimiento(movimiento);
@@ -122,6 +127,8 @@ public class Menu_Movimiento {
 
     public static void buscar() throws IOException {
         System.out.println("--- Buscar movimiento por Código ---");
+        Movimiento movimiento = new Movimiento();
+
         System.out.println("Código del movimiento a buscar: ");
         movimiento.setCod_Movimiento(Integer.parseInt(leer.readLine()));
         ArrayList<Movimiento> movimientos = movimientoDAO.buscarMovimiento(movimiento);

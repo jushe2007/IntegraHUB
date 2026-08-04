@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 public class MovimientoDAO {
 
-    //Extrae todos los datos de la tabla Movimientos
+    // Extrae todos los datos de la tabla Movimientos
     public ArrayList<Movimiento> extraerMovimientos() {
         ArrayList<Movimiento> movimientosBD = new ArrayList<Movimiento>();
         String sql = "SELECT * FROM movimientos";
@@ -136,7 +136,6 @@ public class MovimientoDAO {
             }
 
         } catch (SQLException err) {
-            // Se corrigió el mensaje de error de "cliente" a "movimiento"
             System.err.println("Error al buscar el movimiento: " + err.getMessage());
         }
 
@@ -151,7 +150,6 @@ public class MovimientoDAO {
         try (Connection conexion = Conexion.conectar();
              PreparedStatement stm = conexion.prepareStatement(sql)) {
 
-            // Aquí la conversión de LocalDate a java.sql.Date funciona perfectamente
             stm.setDate(1, java.sql.Date.valueOf(fechaBusqueda));
 
             try (ResultSet rs = stm.executeQuery()) {
@@ -271,9 +269,7 @@ public class MovimientoDAO {
     // Insertar movimiento
     public boolean insertarMovimiento(Movimiento movimiento) {
         boolean insertado = false;
-        String sql = "INSERT INTO movimientos (Cod_Movimientos, Id_almacen6, Movimiento_de_, Id_cliente1, Id_proveedor2, " +
-                "Id_empleado3, descripcion, Fech_Registro, Fech_Orden, Fech_Concluido, Calificacion, desc_Calificacion) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO movimientos (Cod_Movimientos, Id_almacen6, Movimiento_de_, Id_cliente1, Id_proveedor2, Id_empleado3, descripcion, Fech_Registro, Fech_Orden, Fech_Concluido, Calificacion, desc_Calificacion) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection conexion = Conexion.conectar();
              PreparedStatement stm = conexion.prepareStatement(sql)) {
@@ -282,14 +278,14 @@ public class MovimientoDAO {
             stm.setInt(2, movimiento.getId_Almacen6());
             stm.setString(3, movimiento.getMovimiento_de_());
 
-            // Manejo de Id_Cliente1 (puede ser nulo)
+            // Manejo de id_Cliente1 (puede ser nulo en la BD)
             if (movimiento.getId_Cliente1() != null) {
                 stm.setInt(4, movimiento.getId_Cliente1());
             } else {
                 stm.setNull(4, java.sql.Types.INTEGER);
             }
 
-            // Manejo de Id_Proveedor2 (puede ser nulo)
+            // Manejo de id_Proveedor2 (puede ser nulo en la BD)
             if (movimiento.getId_Proveedor2() != null) {
                 stm.setInt(5, movimiento.getId_Proveedor2());
             } else {
@@ -299,21 +295,21 @@ public class MovimientoDAO {
             stm.setInt(6, movimiento.getId_Empleado3());
             stm.setString(7, movimiento.getDescripcion());
 
-            // Manejo seguro de Fech_Registro
+            // Manejo de Fech_Registro
             if (movimiento.getFech_Registro() != null) {
                 stm.setDate(8, java.sql.Date.valueOf(movimiento.getFech_Registro()));
             } else {
                 stm.setNull(8, java.sql.Types.DATE);
             }
 
-// Manejo seguro de Fech_Orden
+            // Manejo de Fech_Orden
             if (movimiento.getFech_Orden() != null) {
                 stm.setDate(9, java.sql.Date.valueOf(movimiento.getFech_Orden()));
             } else {
                 stm.setNull(9, java.sql.Types.DATE);
             }
 
-// Manejo seguro de Fech_Concluido
+            // Manejo de Fech_Concluido
             if (movimiento.getFech_Concluido() != null) {
                 stm.setDate(10, java.sql.Date.valueOf(movimiento.getFech_Concluido()));
             } else {
